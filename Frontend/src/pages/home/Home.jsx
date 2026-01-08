@@ -6,7 +6,7 @@ import TopSellers from "./TopSellers";
 import Recommended from "./Recommended";
 import { useState } from "react";
 import HeroSection from "./HeroSection";
-
+import News from "./News";
 export const Home = () => {
   return (
     <>
