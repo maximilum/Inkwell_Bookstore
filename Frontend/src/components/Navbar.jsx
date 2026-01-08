@@ -9,7 +9,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import avatar from "../assets/avatar.png"; //
 
 const Navbar = () => {
-  // State to handle dropdown
+  // States
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -46,7 +46,7 @@ const Navbar = () => {
       },
     ];
     return (
-      <ul className="absolute  rounded-2xl text-xs    top-7 -left-3 shadow-xl border-1 w-40 overflow-hidden">
+      <ul className="absolute rounded-2xl text-xs top-7 -left-3 shadow-xl w-40 overflow-hidden bg-white">
         {list.map((item) => (
           <li
             className="block px-2 py-2 w-full text-left font-main hover:text-primary  hover:bg-gray-200 transition-all"
@@ -77,7 +77,7 @@ const Navbar = () => {
     return (
       <button
         onClick={() => setIsDropDownOpen(!isDropDownOpen)}
-        className="relative"
+        className="relative size-6"
       >
         <img src={avatar} alt="" className="size-6" />
         {isDropDownOpen && <DropDownList />}
@@ -93,31 +93,32 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex justify-between mx-auto max-w-screen-2xl p-4  items-center">
-      {/* Left side */}
-      <div className="flex mx-4 gap-16">
-        <Link to="/">
-          <TbAlignLeft className="my-auto size-6" />
-        </Link>
-        <SearchBar></SearchBar>
-      </div>
-
-      {/* Right side */}
-      <div className="flex mx-4 gap-3">
-        <div className="flex gap-2 items-center">
-          <User handleLogin={setIsLoggedIn}></User>
-          <Link to="/wishlist">
-            <CiHeart className="my-auto size-6" />
+    <div className="fixed w-full bg-white shadow-lg z-50">
+      <nav className="flex justify-between mx-auto max-w-screen-2xl p-4 items-center">
+        {/* Left side */}
+        <div className="flex mx-4 gap-4 sm:gap-16">
+          <Link to="/">
+            <TbAlignLeft className="my-auto size-6" />
+          </Link>
+          <SearchBar></SearchBar>
+        </div>
+        {/* Right side */}
+        <div className="flex mx-4 gap-3">
+          <div className="flex gap-2 items-center">
+            <User handleLogin={setIsLoggedIn}></User>
+            <Link to="/wishlist" className="hidden sm:block">
+              <CiHeart className="my-auto size-6" />
+            </Link>
+          </div>
+          <Link to="/cart">
+            <Button>
+              <AiOutlineShoppingCart className="my-auto size-6 " />
+              <span className=" my-auto leading-0">Basket</span>
+            </Button>
           </Link>
         </div>
-        <Link to="/cart">
-          <Button>
-            <AiOutlineShoppingCart className="my-auto size-6 " />
-            <span className=" my-auto leading-0">Basket</span>
-          </Button>
-        </Link>
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 };
 

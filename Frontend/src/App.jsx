@@ -8,10 +8,12 @@ function App() {
       <header>
         <Navbar></Navbar>
       </header>
-      <div className="font-main text-primary">
+      <div className="font-main">
         <Outlet />
       </div>
-      <div className="font-main text-secondary">Footer</div>
+      <footer>
+        <div className="w-screen h-16 bg-black text-white">Footer</div>
+      </footer>
     </>
   );
 }
