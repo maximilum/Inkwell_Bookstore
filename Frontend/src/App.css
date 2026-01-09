@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
 @reference "tailwindcss";
-@reference "C:\Users\Munib\Desktop\Maximilum\Coding Enviroment\Bookstore\Frontend\src\index.css"
+@reference "C:/Users/Munib/Desktop/Maximilum/Coding Enviroment/Bookstore/Frontend/src/index.css";
 
 .swiper {
   width: 100%;
@@ -25,12 +25,12 @@
   display: none !important;
 }
 .swiper-button-next {
-  @apply bg-white p-5 rounded-full z-50 shadow-md;
+  @apply bg-white p-5 rounded-full z-50 shadow-xl;
 }
 
 .swiper-button-prev:after,
 .swiper-button-next:after {
-  font-size: 16px !important;
+  font-size: 32px !important;
 }
 
 .btn-primary {
