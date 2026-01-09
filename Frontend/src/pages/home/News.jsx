@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import NewsCard from "./NewsCard";
-
+import { Link } from "react-router-dom";
 // Swiper Imports
-import Swiper from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 
 // import { SwiperSlide } from "swiper/react";
@@ -27,62 +27,33 @@ const News = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
-  // Swiper
-  const swiper = new Swiper(".swiper", {
-    modules: [Navigation, Pagination],
-    // Optional parameters
-    // direction: "horizental",
-    loop: true,
-    breakpoints: {
-      640: {
-        slidesPerView: 1,
-        spaceBetween: 20,
-      },
-      1024: {
-        slidesPerView: 2,
-        spaceBetween: 50,
-      },
-    },
-
-    slidesPerView: 2,
-
-    pagination: {
-      el: ".swiper-pagination",
-    },
-
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-  });
-
   //   Returned elements
   if (isLoading) return <div>Loading</div>;
 
   return (
-    <div className="mx-16 my-16">
-      <h1 className="text-2xl font-semibold">News</h1>
-      <div>
-        {/* <!-- Slider main container --> */}
-        <div className="swiper ">
-          {/* <!-- Additional required wrapper --> */}
-          <div className="swiper-wrapper hover:shadow-2xl">
-            {/* <!-- Slides --> */}
-            {news.map((newsItem, index) => (
-              <div key={index} className="swiper-slide ">
-                <NewsCard newsItem={newsItem} className=""></NewsCard>
-              </div>
-            ))}
-          </div>
-          {/* <!-- If we need pagination --> */}
-          <div class="swiper-pagination"></div>
-          {/* <!-- If we need navigation buttons --> */}
-          <div className="swiper-button-prev h-6 w-6 bg-primary"></div>
-          <div className="swiper-button-next h-6 w-6 bg-primary"></div>
-          {/* <!-- If we need scrollbar --> */}
-          <div className="swiper-scrollbar"></div>
-        </div>
-      </div>
+    <div className=" my-16">
+      <Link>
+        <h1 className="text-2xl font-semibold  mx-8 mb-4">News</h1>
+      </Link>
+      <Swiper
+        spaceBetween={20}
+        slidesPerView={1}
+        onSlideChange={() => console.log("slide change")}
+        onSwiper={(swiper) => console.log(swiper)}
+        modules={[Navigation, Pagination]}
+        breakpoints={{
+          1024: { slidesPerView: 2, spaceBetween: 20 },
+        }}
+        loop={true}
+        navigation
+        pagination={{ clickable: true }}
+      >
+        {news.map((newsItem, index) => (
+          <SwiperSlide key={newsItem._id ?? index}>
+            <NewsCard newsItem={newsItem} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 };
