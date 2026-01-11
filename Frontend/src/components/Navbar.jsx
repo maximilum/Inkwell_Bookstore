@@ -46,7 +46,7 @@ const Navbar = () => {
       },
     ];
     return (
-      <ul className="absolute rounded-2xl text-xs top-7 -left-3 shadow-xl w-40 overflow-hidden bg-white">
+      <ul className="fixed rounded-2xl text-xs top-7 -left-3 shadow-xl w-40 overflow-hidden bg-white">
         {list.map((item) => (
           <li
             className="block px-2 py-2 w-full text-left font-main hover:text-primary  hover:bg-gray-200 transition-all"
@@ -68,9 +68,11 @@ const Navbar = () => {
   };
   const LoggedOut = ({ handleLogin }) => {
     return (
-      <button onClick={() => handleLogin(true)}>
-        <CiUser className="size-6" />
-      </button>
+      <Link to="/login">
+        <button>
+          <CiUser className="size-6" />
+        </button>
+      </Link>
     );
   };
   const LoggedIn = ({ handleLogin }) => {
@@ -93,8 +95,8 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed w-full bg-white shadow-lg z-50">
-      <nav className="flex justify-between mx-auto max-w-screen-2xl p-4 items-center">
+    <div className=" sticky top-0 w-full bg-white shadow-lg z-50">
+      <nav className=" flex justify-between mx-auto max-w-screen-2xl p-4 items-center">
         {/* Left side */}
         <div className="flex mx-4 gap-4 sm:gap-16">
           <Link to="/">
