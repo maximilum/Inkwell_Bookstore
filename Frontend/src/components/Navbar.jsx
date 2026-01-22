@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import avatar from "../assets/avatar.png"; //
+// import store from "../Redux/store.js";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   // States
@@ -93,6 +95,8 @@ const Navbar = () => {
       <LoggedOut handleLogin={handleLogin} />
     );
   };
+  const cartItems = useSelector((state) => state.cart?.cartItems ?? []);
+  const cartCount = cartItems.length;
 
   return (
     <div className=" sticky top-0 w-full bg-white shadow-lg z-50">
@@ -115,6 +119,7 @@ const Navbar = () => {
           <Link to="/cart">
             <Button>
               <AiOutlineShoppingCart className="my-auto size-6 " />
+              <span>{cartCount}</span>
               <span className=" my-auto leading-0">Basket</span>
             </Button>
           </Link>

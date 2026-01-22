@@ -4,8 +4,12 @@ import Button from "../../components/Button";
 import { Link } from "react-router-dom";
 import getImgURL from "../../utils/ImgURLcreator";
 import styles from "./carouselCard.module.css";
+import { useDispatch } from "react-redux";
+import { addItemToCart } from "../../Redux/cartSlice";
 
 const BookInfo = ({ book, path }) => {
+  const dispatch = useDispatch();
+
   const title = book.title;
   const shownTitle = title.length < 20 ? title : `${title.slice(0, 20)}...`;
   const info = book.description;
@@ -36,10 +40,12 @@ const BookInfo = ({ book, path }) => {
           <span className="">{price}</span>
           <span className="text-gray-500 line-through">{price2}</span>
         </div>
-        <Button className="">
-          <AiOutlineShoppingCart className="h-8 w-8" />
-          <span className="text-lg font-semibold">Add to cart</span>
-        </Button>
+        <div onClick={() => dispatch(addItemToCart(book))}>
+          <Button>
+            <AiOutlineShoppingCart className="h-8 w-8" />
+            <span className="text-lg font-semibold">Add to cart</span>
+          </Button>
+        </div>
       </div>
     </div>
   );

@@ -1,14 +1,25 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
+  // React Hook Form
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
+  console.log(watch("email")); // watch input value by passing the name of it
+
   return (
     <div className="flex items-center justify-center m-[10px] h-[calc(100dvh-67px)]  ">
       <div className="sm:w-[400px] shadow-2xl p-6">
         <h1 className="mb-10 font-semibold">Please Login</h1>
-        <form action="" className="text-[16px]">
-          <div className="mb-[24px]">
+        <form onSubmit={handleSubmit(onSubmit)} className="text-[16px]">
+          <div className="mb-[24px] relative">
             <label
               htmlFor="email"
               className="block mb-2 text-[14px] font-semibold"
@@ -16,12 +27,20 @@ const Login = () => {
               Email
             </label>
             <input
+              {...register("email", {
+                required: { value: true, message: "This feld is required" },
+              })}
               type="email"
               placeholder="E-mail"
               className="w-full py-[12px] px-[16px] border focus:outline-0"
             />
+            {errors.email && (
+              <span className="text-red-500 text-xs absolute left-2 -bottom-5">
+                {errors?.email?.message}
+              </span>
+            )}
           </div>
-          <div className="mb-[24px]">
+          <div className="mb-[24px] relative">
             <label
               htmlFor="password"
               className="block mb-2 text-[14px] font-semibold"
@@ -29,13 +48,25 @@ const Login = () => {
               Password
             </label>
             <input
+              {...register("password", {
+                required: { value: true, message: "This field is required" },
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 characters",
+                },
+              })}
               type="password"
               placeholder="Password"
               className="w-full py-[12px] px-[16px] border focus:outline-0"
             />
+            {errors.password && (
+              <span className="text-red-500 text-xs absolute left-2 -bottom-5">
+                {errors?.password?.message}
+              </span>
+            )}
           </div>
           <p className="text-xs my-[16px] ">
-            if you don't have an account,&nbsp;&nbsp;
+            if you don't have an account,&nbsp;&nbsp;please&nbsp;
             <Link to="/register">
               <span className="text-secondary hover:text-sky-500 font-semibold">
                 register
@@ -46,7 +77,10 @@ const Login = () => {
             Login
           </button>
         </form>
-        <button className=" flex justify-center gap-4  mt-[8px] w-full text-[16px] py-[12px] border text-black">
+        <button
+          type="submit"
+          className="flex justify-center gap-4  mt-[8px] w-full text-[16px] py-[12px] border text-black"
+        >
           <span className=" flex justify-center items-center ">
             <FcGoogle />
           </span>

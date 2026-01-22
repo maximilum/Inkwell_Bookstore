@@ -3,7 +3,7 @@ import image from "/news/news-1.png";
 import getImgURL from "../../utils/ImgURLcreator";
 import { Link } from "react-router-dom";
 const NewsCard = ({ newsItem }) => {
-  console.log(newsItem);
+  // console.log(newsItem);
 
   return (
     <div className=" flex items-center justify-center mx-16 hover:scale-102 transition-transform duration-300 ease ">
