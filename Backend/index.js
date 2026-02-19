@@ -2,13 +2,13 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
 const connect_DB = require("./config/database.js");
+const { booksRouter } = require("./routers/booksRouter");
 
 dotenv.config();
 PORT = process.env.PORT;
+app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello world");
-});
+app.use("/api/books/", booksRouter);
 const init = async () => {
   await connect_DB();
   app.listen(PORT, () => {
