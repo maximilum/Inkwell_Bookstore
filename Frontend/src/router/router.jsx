@@ -5,6 +5,7 @@ import Login from "../components/Login";
 import Register from "../components/Register";
 import Cart from "../pages/Cart/Cart";
 import MyCart from "../pages/Cart/MyCart";
+import Checkout from "../pages/Cart/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/checkout",
-        element: <h1 className="mx-auto w-max text-center">Checkout</h1>,
+        element: <Checkout></Checkout>,
       },
       {
         path: "/login",

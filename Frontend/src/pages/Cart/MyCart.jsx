@@ -41,9 +41,9 @@ const MyCart = () => {
 
       {/* Layer 2 */}
       {/* Container */}
-      <div className="mt-8 sm:mt-16 flex flex-col gap-8 sm:gap-16 ">
+      <div className="mt-8 sm:mt-16 flex flex-col gap-8 sm:gap-12 ">
         {books.map((book) => (
-          <div key={book._id} className="">
+          <div key={book._id} className="shadow pb-4">
             <div className="flex">
               {/* Book Cover Image */}
               <div className="image-cover">
@@ -85,8 +85,8 @@ const MyCart = () => {
         ))}
       </div>
 
-      {/* Divider */}
-      <div className="h-[0.5px] w-full bg-gray-300 my-8"></div>
+      {/* Divider
+      <div className="h-[0.5px] w-full bg-gray-300 my-8"></div> */}
 
       {/* Layer 3 */}
       <div className="flex justify-between mt-8">
