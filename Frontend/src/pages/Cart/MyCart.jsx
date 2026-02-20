@@ -91,7 +91,7 @@ const MyCart = () => {
       {/* Layer 3 */}
       <div className="flex justify-between mt-8">
         <p className="ml-4 sm:text-lg">Total</p>
-        <p className="font-bold">{`$${books.reduce((total, book) => total + book.newPrice, 0).toFixed(2)}`}</p>
+        <p className="font-bold">{`$${books.reduce((total, book) => total + parseFloat(book.newPrice), 0).toFixed(2)}`}</p>
       </div>
       <p className="text-gray-500 text-center text-sm">
         {" "}

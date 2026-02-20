@@ -1,23 +1,14 @@
 import React from "react";
 import BookInfo from "./BookInfo";
-import { useEffect } from "react";
 import { useState } from "react";
 import styles from "./carousel.module.css";
+import { useGetAllBooksQuery } from "../../Redux/booksApiSlice";
 
 const TopSellers = () => {
-  const [books, setBooks] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { data, isLoading } = useGetAllBooksQuery();
+  const books = data?.data || [];
+  console.log(books);
   const [filter, setFilter] = useState("Select a genre");
-
-  useEffect(() => {
-    fetch("/books.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setBooks(data);
-      })
-      .catch((err) => console.log(err))
-      .finally(() => setIsLoading(false));
-  }, []);
 
   const filteredBooks =
     filter === "Select a genre"
