@@ -58,7 +58,9 @@ const deleteBook = async (req, res) => {
     return res.status(400).json({ message: "Invalid book ID" });
   }
   try {
-    const deletedBook = await Book.findByIdAndDelete(id, { new: true });
+    const deletedBook = await Book.findByIdAndDelete(id, {
+      returnDocument: "after",
+    });
     if (!deletedBook) {
       return res
         .status(404)
@@ -78,7 +80,9 @@ const editBook = async (req, res) => {
     return res.status(400).json({ message: "Invalid book ID" });
   }
   try {
-    const updatedBook = await Book.findByIdAndUpdate(id, update, { new: true });
+    const updatedBook = await Book.findByIdAndUpdate(id, update, {
+      returnDocument: "after",
+    });
     if (!updatedBook) {
       return res
         .status(404)
