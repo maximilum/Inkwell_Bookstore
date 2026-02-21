@@ -28,9 +28,17 @@ export const booksApi = createApi({
     }),
     addBook: builder.mutation({
       query: (newBook) => ({
-        url: () => "/",
+        url: "/",
         method: "POST",
         body: newBook,
+      }),
+      invalidatesTags: ["books"],
+    }),
+    updateBook: builder.mutation({
+      query: (id, update) => ({
+        url: `/${id}`,
+        method: "PATCH",
+        body: update,
       }),
       invalidatesTags: ["books"],
     }),
