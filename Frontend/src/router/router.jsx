@@ -6,6 +6,7 @@ import Register from "../components/Register";
 import Cart from "../pages/Cart/Cart";
 import MyCart from "../pages/Cart/MyCart";
 import Checkout from "../pages/Cart/Checkout";
+import Book from "../pages/Books/Book";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/books/:id",
+        element: <Book></Book>,
       },
     ],
   },

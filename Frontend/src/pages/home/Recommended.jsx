@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import React from "react";
 import styles from "./carousel2.module.css";
 import BookInfo from "./BookInfo";
