@@ -43,7 +43,7 @@ const MyCart = () => {
       {/* Container */}
       <div className="mt-8 sm:mt-16 flex flex-col gap-8 sm:gap-12 ">
         {books.map((book) => (
-          <div key={book._id} className="shadow pb-4">
+          <div key={book._id} className="shadow ">
             <div className="flex">
               {/* Book Cover Image */}
               <div className="image-cover">
@@ -54,7 +54,7 @@ const MyCart = () => {
                 />
               </div>
               {/* Book Info */}
-              <div className="ml-2 sm:ml-4 flex flex-col justify-between w-full">
+              <div className="ml-2 py-4 px-6 sm:ml-4 flex flex-col justify-between w-full">
                 <div className="h-min w-full  flex flex-wrap justify-between  gap-2">
                   <div>
                     <p className="text-sm sm:text-lg">{book.title}</p>

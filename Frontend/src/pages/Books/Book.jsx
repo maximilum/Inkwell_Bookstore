@@ -21,19 +21,13 @@ const Book = () => {
     );
   return (
     <div className="my-4 mx-auto flex p-8 flex-col justify-center items-baseline gap-3 w-[800px] shadow-2xl">
-      <div className="w-full flex justify-between">
-        <img
-          src={`${getImgURL("books", book.coverImage)}`}
-          alt=""
-          className="h-64 mb-4 bg-cover cursor-pointer hover:scale-105 transition-all duration-200"
-        />
-        <div onClick={() => dispatch(addItemToCart(book))}>
-          <Button>
-            <AiOutlineShoppingCart className="h-8 w-8" />
-          </Button>
-        </div>
-      </div>
+      <img
+        src={`${getImgURL("books", book.coverImage)}`}
+        alt=""
+        className="h-64 mb-4 bg-cover cursor-pointer hover:scale-105 transition-all duration-200"
+      />
       <h1 className="text-2xl font-bold ">{book.title}</h1>
+
       <p>
         <span className="text-gray-500">Category : </span>
         {book.category}
@@ -48,6 +42,12 @@ const Book = () => {
         </span>
       </p>
       <h2 className="text-sm">{book.description}</h2>
+      <div className="w-full" onClick={() => dispatch(addItemToCart(book))}>
+        <Button isFull={true}>
+          <AiOutlineShoppingCart className="h-8 w-8 font-bold" />
+          <span className=" font-bold">Add to Cart</span>
+        </Button>
+      </div>
     </div>
   );
 };

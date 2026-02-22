@@ -1,4 +1,3 @@
-import img1 from "../../assets/books/book-1.png";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import Button from "../../components/Button";
 import { Link } from "react-router-dom";
