@@ -31,18 +31,37 @@ export const booksApi = createApi({
         url: "/",
         method: "POST",
         body: newBook,
+        headers: {
+          "content-type": "application/json",
+        },
       }),
       invalidatesTags: ["books"],
     }),
     updateBook: builder.mutation({
-      query: (id, update) => ({
+      query: ({ id, update }) => ({
         url: `/${id}`,
         method: "PATCH",
         body: update,
+        headers: {
+          "content-type": "application/json",
+        },
+      }),
+      invalidatesTags: ["books"],
+    }),
+    deleteBook: builder.mutation({
+      query: (id) => ({
+        url: `${id}`,
+        method: "DELETE",
       }),
       invalidatesTags: ["books"],
     }),
   }),
 });
 
-export const { useGetAllBooksQuery, useGetBookQuery } = booksApi;
+export const {
+  useGetAllBooksQuery,
+  useGetBookQuery,
+  useAddBookMutation,
+  useDeleteBookMutation,
+  useUpdateBookMutation,
+} = booksApi;
