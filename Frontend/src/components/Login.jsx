@@ -2,17 +2,18 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import { useAuth } from "../auth/AuthContext";
 
 const Login = () => {
+  // auth context
+  const { signIn } = useAuth();
   // React Hook Form
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
-  console.log(watch("email")); // watch input value by passing the name of it
+  const onSubmit = (data) => signIn(data.email, data.password);
 
   return (
     <div className="flex items-center justify-center m-[10px] h-[calc(100dvh-67px)]  ">
