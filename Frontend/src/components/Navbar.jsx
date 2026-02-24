@@ -9,11 +9,39 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import avatar from "../assets/avatar.png"; //
 // import store from "../Redux/store.js";
 import { useSelector } from "react-redux";
+import { useAuth } from "../authentication/Auth.jsx";
 
 const Navbar = () => {
   // States
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const LoggedOut = ({ handleLogin }) => {
+    return (
+      <Link to="/login">
+        <button>
+          <CiUser className="size-6" />
+        </button>
+      </Link>
+    );
+  };
+  const LoggedIn = ({ handleLogin }) => {
+    return (
+      <button
+        onClick={() => setIsDropDownOpen(!isDropDownOpen)}
+        className="relative size-6"
+      >
+        <img src={avatar} alt="" className="size-6" />
+        {isDropDownOpen && <DropDownList />}
+      </button>
+    );
+  };
+  const User = ({ handleLogin }) => {
+    return isLoggedIn ? (
+      <LoggedIn handleLogin={handleLogin} />
+    ) : (
+      <LoggedOut handleLogin={handleLogin} />
+    );
+  };
 
   // Presentational components
   const SearchBar = () => {
@@ -48,7 +76,7 @@ const Navbar = () => {
       },
     ];
     return (
-      <ul className="fixed rounded-2xl text-xs top-7 -left-3 shadow-xl w-40 overflow-hidden bg-white">
+      <ul className="fixed rounded-2xl text-xs top-15 right-0 shadow-xl w-40 overflow-hidden bg-white">
         {list.map((item) => (
           <li
             className="block px-2 py-2 w-full text-left font-main hover:text-primary  hover:bg-gray-200 transition-all"
@@ -68,33 +96,7 @@ const Navbar = () => {
       </ul>
     );
   };
-  const LoggedOut = ({ handleLogin }) => {
-    return (
-      <Link to="/login">
-        <button>
-          <CiUser className="size-6" />
-        </button>
-      </Link>
-    );
-  };
-  const LoggedIn = ({ handleLogin }) => {
-    return (
-      <button
-        onClick={() => setIsDropDownOpen(!isDropDownOpen)}
-        className="relative size-6"
-      >
-        <img src={avatar} alt="" className="size-6" />
-        {isDropDownOpen && <DropDownList />}
-      </button>
-    );
-  };
-  const User = ({ handleLogin }) => {
-    return isLoggedIn ? (
-      <LoggedIn handleLogin={handleLogin} />
-    ) : (
-      <LoggedOut handleLogin={handleLogin} />
-    );
-  };
+
   const cartItems = useSelector((state) => state.cart?.cartItems ?? []);
   const cartCount = cartItems.length;
 
