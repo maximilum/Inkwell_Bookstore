@@ -8,6 +8,8 @@ import {
 import auth from "./firebase.config.js";
 import PlainLoading from "../components/LoadingScreen/Plain_Loading.jsx";
 import { useNavigate } from "react-router-dom";
+import { getUserId, initiateCart } from "../Redux/cartSlice.js";
+import { useDispatch } from "react-redux";
 
 const AuthContext = createContext();
 
@@ -34,6 +36,13 @@ const AuthProvider = ({ children }) => {
     });
     return unsubscribe;
   }, []);
+
+  // initiate cart load from local storage
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const uid = getUserId();
+    dispatch(initiateCart(uid));
+  }, [user]);
 
   // signup
   const signUp = async (email, password) => {
