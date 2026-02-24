@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { useAuth } from "../auth/AuthContext";
 
 const DropDownList = () => {
-  const { setUser, handleSignOut } = useAuth();
+  const { handleSignOut } = useAuth();
   const list = [
     {
       name: "Dashboard",

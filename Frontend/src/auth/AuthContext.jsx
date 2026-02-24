@@ -1,10 +1,13 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 import auth from "./firebase.config.js";
+import PlainLoading from "../components/LoadingScreen/Plain_Loading.jsx";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -15,9 +18,22 @@ export const useAuth = () => {
 };
 
 // auth Provider component
+// ===================================
 const AuthProvider = ({ children }) => {
+  // navigation
+  const navigate = useNavigate();
   // Global states
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // auth observer
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      setLoading(false);
+    });
+    return unsubscribe;
+  }, []);
 
   // signup
   const signUp = async (email, password) => {
@@ -29,6 +45,7 @@ const AuthProvider = ({ children }) => {
       );
       setUser(userCredential.user);
       alert("user registered successfully");
+      navigate("/");
     } catch (error) {
       alert(error.message);
     }
@@ -43,6 +60,7 @@ const AuthProvider = ({ children }) => {
       );
       setUser(userCredentials.user);
       alert("sign in successfull");
+      navigate("/");
     } catch (error) {
       alert(error.message);
     }
@@ -53,12 +71,15 @@ const AuthProvider = ({ children }) => {
       await signOut(auth);
       alert("signed out successfully");
       setUser(null);
+      navigate("/");
     } catch (error) {
       alert(error.message);
     }
   };
 
-  const value = { signUp, signIn, user, setUser, handleSignOut };
+  const value = { user, signUp, signIn, setUser, handleSignOut };
+  if (loading) return <PlainLoading></PlainLoading>;
+
   return <AuthContext value={value}>{children}</AuthContext>;
 };
 export default AuthProvider;
