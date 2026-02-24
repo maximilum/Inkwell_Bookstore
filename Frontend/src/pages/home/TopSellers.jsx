@@ -7,14 +7,12 @@ import { useGetAllBooksQuery } from "../../Redux/booksApiSlice";
 const TopSellers = () => {
   const { data, isLoading } = useGetAllBooksQuery();
   const books = data?.data || [];
-  console.log(books);
   const [filter, setFilter] = useState("Select a genre");
 
   const filteredBooks =
     filter === "Select a genre"
       ? books
       : books.filter((book) => book.category === filter);
-  //   console.log(filteredBooks);
 
   if (isLoading) return <div>Loading...</div>;
   if (filteredBooks.length === 0) return <div>No books found</div>;

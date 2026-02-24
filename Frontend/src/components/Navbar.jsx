@@ -14,8 +14,8 @@ import { useAuth } from "../authentication/Auth.jsx";
 const Navbar = () => {
   // States
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const LoggedOut = ({ handleLogin }) => {
+
+  const LoggedOut = () => {
     return (
       <Link to="/login">
         <button>
@@ -24,7 +24,7 @@ const Navbar = () => {
       </Link>
     );
   };
-  const LoggedIn = ({ handleLogin }) => {
+  const LoggedIn = () => {
     return (
       <button
         onClick={() => setIsDropDownOpen(!isDropDownOpen)}
@@ -35,12 +35,10 @@ const Navbar = () => {
       </button>
     );
   };
-  const User = ({ handleLogin }) => {
-    return isLoggedIn ? (
-      <LoggedIn handleLogin={handleLogin} />
-    ) : (
-      <LoggedOut handleLogin={handleLogin} />
-    );
+  const User = () => {
+    const auth = useAuth();
+    const user = auth?.user || null;
+    return user ? <LoggedIn /> : <LoggedOut />;
   };
 
   // Presentational components
@@ -75,6 +73,8 @@ const Navbar = () => {
         link: "/checkout",
       },
     ];
+    const { handleSignOut } = useAuth();
+
     return (
       <ul className="fixed rounded-2xl text-xs top-15 right-0 shadow-xl w-40 overflow-hidden bg-white">
         {list.map((item) => (
@@ -86,12 +86,12 @@ const Navbar = () => {
           </li>
         ))}
         <li className="m-1 text-left font-main  " key="log out">
-          <button
+          <div
             className="cursor-pointer hover:text-red-600 transition-all w-full mb-2 text-left ml-1"
-            onClick={() => setIsLoggedIn(false)}
+            onClick={() => handleSignOut()}
           >
             Log Out
-          </button>
+          </div>
         </li>
       </ul>
     );
@@ -113,7 +113,7 @@ const Navbar = () => {
         {/* Right side */}
         <div className="flex mx-4 gap-3">
           <div className="flex gap-2 items-center">
-            <User handleLogin={setIsLoggedIn}></User>
+            <User></User>
             <Link to="/wishlist" className="hidden sm:block">
               <CiHeart className="my-auto size-6" />
             </Link>
