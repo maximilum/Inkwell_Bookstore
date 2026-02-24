@@ -2,6 +2,7 @@ import { createContext, useContext, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import auth from "./firebase.config.js";
 
@@ -46,8 +47,18 @@ const AuthProvider = ({ children }) => {
       alert(error.message);
     }
   };
+  // SignOut
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      alert("signed out successfully");
+      setUser(null);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
-  const value = { signUp, signIn, user, setUser };
+  const value = { signUp, signIn, user, setUser, handleSignOut };
   return <AuthContext value={value}>{children}</AuthContext>;
 };
 export default AuthProvider;

@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { useAuth } from "../auth/AuthContext";
 
 const DropDownList = () => {
-  const { setUser } = useAuth();
+  const { setUser, handleSignOut } = useAuth();
   const list = [
     {
       name: "Dashboard",
@@ -44,7 +44,7 @@ const DropDownList = () => {
       <li className="m-1 text-left font-main  " key="log out">
         <button
           className="cursor-pointer hover:text-red-600 transition-all w-full mb-2 text-left ml-1"
-          onClick={() => setUser(null)}
+          onClick={() => handleSignOut()}
         >
           Log Out
         </button>
