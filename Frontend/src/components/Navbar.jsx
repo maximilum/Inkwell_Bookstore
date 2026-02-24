@@ -9,74 +9,54 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import avatar from "../assets/avatar.png"; //
 // import store from "../Redux/store.js";
 import { useSelector } from "react-redux";
+import { useAuth } from "../auth/AuthContext";
+
+const DropDownList = () => {
+  const { setUser } = useAuth();
+  const list = [
+    {
+      name: "Dashboard",
+      link: "/",
+    },
+    {
+      name: "Orders",
+      link: "/orders",
+    },
+    {
+      name: "Cart Page",
+      link: "/cart",
+    },
+    {
+      name: "Check Out",
+      link: "/checkout",
+    },
+  ];
+  return (
+    <ul className="fixed rounded-2xl text-xs top-15 right-3 shadow-xl w-40 overflow-hidden bg-white">
+      {list.map((item) => (
+        <li
+          className="block px-2 py-2 w-full text-left font-main hover:text-primary  hover:bg-gray-200 transition-all"
+          key={item.name}
+        >
+          <Link to={item.link}>{item.name}</Link>
+        </li>
+      ))}
+      <li className="m-1 text-left font-main  " key="log out">
+        <button
+          className="cursor-pointer hover:text-red-600 transition-all w-full mb-2 text-left ml-1"
+          onClick={() => setUser(null)}
+        >
+          Log Out
+        </button>
+      </li>
+    </ul>
+  );
+};
 
 const Navbar = () => {
+  const { user } = useAuth();
   // States
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // Presentational components
-
-  const DropDownList = () => {
-    const list = [
-      {
-        name: "Dashboard",
-        link: "/",
-      },
-      {
-        name: "Orders",
-        link: "/orders",
-      },
-      {
-        name: "Cart Page",
-        link: "/cart",
-      },
-      {
-        name: "Check Out",
-        link: "/checkout",
-      },
-    ];
-    return (
-      <ul className="fixed rounded-2xl text-xs top-7 -left-3 shadow-xl w-40 overflow-hidden bg-white">
-        {list.map((item) => (
-          <li
-            className="block px-2 py-2 w-full text-left font-main hover:text-primary  hover:bg-gray-200 transition-all"
-            key={item.name}
-          >
-            <Link to={item.link}>{item.name}</Link>
-          </li>
-        ))}
-        <li className="m-1 text-left font-main  " key="log out">
-          <button
-            className="cursor-pointer hover:text-red-600 transition-all w-full mb-2 text-left ml-1"
-            onClick={() => setIsLoggedIn(false)}
-          >
-            Log Out
-          </button>
-        </li>
-      </ul>
-    );
-  };
-  const LoggedOut = ({ handleLogin }) => {
-    return (
-      <Link to="/login">
-        <button onClick={handleLogin}>
-          <CiUser className="size-6" />
-        </button>
-      </Link>
-    );
-  };
-  const LoggedIn = () => {
-    return (
-      <button
-        onClick={() => setIsDropDownOpen(!isDropDownOpen)}
-        className="relative size-6"
-      >
-        <img src={avatar} alt="" className="size-6" />
-        {isDropDownOpen && <DropDownList />}
-      </button>
-    );
-  };
 
   const cartItems = useSelector((state) => state.cart?.cartItems ?? []);
   const cartCount = cartItems.length;
@@ -101,11 +81,22 @@ const Navbar = () => {
         </div>
         {/* Right side */}
         <div className="flex mx-4 gap-3">
+          {/* User Icon */}
           <div className="flex gap-2 items-center">
-            {isLoggedIn ? (
-              <LoggedIn />
+            {user ? (
+              <button
+                onClick={() => setIsDropDownOpen(!isDropDownOpen)}
+                className="relative size-6"
+              >
+                <img src={avatar} alt="" className="size-6" />
+                {isDropDownOpen && <DropDownList />}
+              </button>
             ) : (
-              <LoggedOut handleLogin={setIsLoggedIn} />
+              <Link to="/login">
+                <button>
+                  <CiUser className="size-6" />
+                </button>
+              </Link>
             )}
             <Link to="/wishlist" className="hidden sm:block">
               <CiHeart className="my-auto size-6" />

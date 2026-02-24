@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import NewsCard from "./NewsCard";
 import { Link } from "react-router-dom";
 // Swiper Imports
