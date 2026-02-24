@@ -16,18 +16,7 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Presentational components
-  const SearchBar = () => {
-    return (
-      <div className="flex items-center justify-around gap-2 bg-[#eaeaea] rounded py-1 px-2 pr-4 w-full text-sm">
-        <FaMagnifyingGlass className="size-4" />
-        <input
-          type="text"
-          className="focus:outline-none w-full     placeholder:text-xs"
-          placeholder="What are you looking for?"
-        />
-      </div>
-    );
-  };
+
   const DropDownList = () => {
     const list = [
       {
@@ -71,13 +60,13 @@ const Navbar = () => {
   const LoggedOut = ({ handleLogin }) => {
     return (
       <Link to="/login">
-        <button>
+        <button onClick={handleLogin}>
           <CiUser className="size-6" />
         </button>
       </Link>
     );
   };
-  const LoggedIn = ({ handleLogin }) => {
+  const LoggedIn = () => {
     return (
       <button
         onClick={() => setIsDropDownOpen(!isDropDownOpen)}
@@ -88,13 +77,7 @@ const Navbar = () => {
       </button>
     );
   };
-  const User = ({ handleLogin }) => {
-    return isLoggedIn ? (
-      <LoggedIn handleLogin={handleLogin} />
-    ) : (
-      <LoggedOut handleLogin={handleLogin} />
-    );
-  };
+
   const cartItems = useSelector((state) => state.cart?.cartItems ?? []);
   const cartCount = cartItems.length;
 
@@ -106,12 +89,24 @@ const Navbar = () => {
           <Link to="/">
             <TbAlignLeft className="my-auto size-6" />
           </Link>
-          <SearchBar></SearchBar>
+          {/* Search bar */}
+          <div className="flex items-center justify-around gap-2 bg-[#eaeaea] rounded py-1 px-2 pr-4 w-full text-sm">
+            <FaMagnifyingGlass className="size-4" />
+            <input
+              type="text"
+              className="focus:outline-none w-full     placeholder:text-xs"
+              placeholder="What are you looking for?"
+            />
+          </div>
         </div>
         {/* Right side */}
         <div className="flex mx-4 gap-3">
           <div className="flex gap-2 items-center">
-            <User handleLogin={setIsLoggedIn}></User>
+            {isLoggedIn ? (
+              <LoggedIn />
+            ) : (
+              <LoggedOut handleLogin={setIsLoggedIn} />
+            )}
             <Link to="/wishlist" className="hidden sm:block">
               <CiHeart className="my-auto size-6" />
             </Link>

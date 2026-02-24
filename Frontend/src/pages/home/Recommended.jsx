@@ -6,7 +6,6 @@ import { useGetAllBooksQuery } from "../../Redux/booksApiSlice";
 const Recommended = () => {
   const { data, isLoading } = useGetAllBooksQuery();
   const books = data?.data || [];
-  console.log(books);
   if (isLoading) return <h1>Loading</h1>;
 
   return (
