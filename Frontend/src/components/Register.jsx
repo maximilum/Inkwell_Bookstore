@@ -6,7 +6,7 @@ import { useAuth } from "../auth/AuthContext";
 
 const Login = () => {
   // Auth Context
-  const { signUp } = useAuth();
+  const { signUp, signInWithGoogle } = useAuth();
   // React Hook Form
   const {
     register,
@@ -78,7 +78,10 @@ const Login = () => {
             Sign up
           </button>
         </form>
-        <button className=" flex justify-center gap-4  mt-[8px] w-full text-[16px] py-[12px] border text-black">
+        <button
+          onClick={signInWithGoogle}
+          className=" flex justify-center gap-4  mt-[8px] w-full text-[16px] py-[12px] border text-black"
+        >
           <span className=" flex justify-center items-center ">
             <FcGoogle />
           </span>
