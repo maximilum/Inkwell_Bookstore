@@ -119,7 +119,9 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const currentUser = auth.currentUser;
   const value = {
+    currentUser,
     user,
     signUp,
     signIn,
