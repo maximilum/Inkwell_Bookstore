@@ -2,7 +2,7 @@ const Order = require("../models/orders.model");
 
 const createOrder = async (req, res) => {
   const newOrder = req.body;
-  const order = await new Order(newOrder);
+  const order = new Order(newOrder);
   try {
     const addedOrder = await order.save(order);
     console.log("Order Placed successfully");
@@ -10,8 +10,8 @@ const createOrder = async (req, res) => {
       .status(200)
       .json({ message: "Order Placed successfully", data: addedOrder });
   } catch (error) {
-    console.error("error creating order: ", error);
-    res.status(500).json({ message: "Failed to create order" });
+    console.error("database error: ", error);
+    res.status(500).json({ message: error.message });
   }
 };
 
