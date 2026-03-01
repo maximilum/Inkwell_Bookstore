@@ -17,7 +17,6 @@ const createOrder = async (req, res) => {
 
 const getAllOrders = async (req, res) => {
   const id = req.params.id;
-  console.log(id);
   try {
     const orders = await Order.find({ uid: id });
     if (orders.length === 0) {
