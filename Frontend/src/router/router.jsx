@@ -7,6 +7,8 @@ import Cart from "../pages/Cart/Cart";
 import MyCart from "../pages/Cart/MyCart";
 import Checkout from "../pages/Cart/Checkout";
 import Book from "../pages/Books/Book";
+import Orders from "../pages/Cart/Orders";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +25,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/Orders",
-        element: <h1 className="mx-auto w-max text-center">Orders</h1>,
+        element: (
+          <PrivateRoute>
+            <Orders></Orders>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/cart",
@@ -31,7 +37,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/checkout",
-        element: <Checkout></Checkout>,
+        element: (
+          <PrivateRoute>
+            <Checkout></Checkout>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",

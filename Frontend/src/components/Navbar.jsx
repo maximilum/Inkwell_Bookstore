@@ -9,93 +9,54 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import avatar from "../assets/avatar.png"; //
 // import store from "../Redux/store.js";
 import { useSelector } from "react-redux";
-import { useAuth } from "../authentication/Auth.jsx";
+import { useAuth } from "../auth/AuthContext";
+
+const DropDownList = () => {
+  const { handleSignOut } = useAuth();
+  const list = [
+    {
+      name: "Dashboard",
+      link: "/",
+    },
+    {
+      name: "Orders",
+      link: "/orders",
+    },
+    {
+      name: "Cart Page",
+      link: "/cart",
+    },
+    {
+      name: "Check Out",
+      link: "/checkout",
+    },
+  ];
+  return (
+    <ul className="fixed rounded-2xl text-xs top-15 right-3 shadow-xl w-40 overflow-hidden bg-white">
+      {list.map((item) => (
+        <li
+          className="block px-2 py-2 w-full text-left font-main hover:text-primary  hover:bg-gray-200 transition-all"
+          key={item.name}
+        >
+          <Link to={item.link}>{item.name}</Link>
+        </li>
+      ))}
+      <li className="m-1 text-left font-main  " key="log out">
+        <button
+          className="cursor-pointer hover:text-red-600 transition-all w-full mb-2 text-left ml-1"
+          onClick={() => handleSignOut()}
+        >
+          Log Out
+        </button>
+      </li>
+    </ul>
+  );
+};
 
 const Navbar = () => {
+  const { user } = useAuth();
   // States
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
-
-  const LoggedOut = () => {
-    return (
-      <Link to="/login">
-        <button>
-          <CiUser className="size-6" />
-        </button>
-      </Link>
-    );
-  };
-  const LoggedIn = () => {
-    return (
-      <button
-        onClick={() => setIsDropDownOpen(!isDropDownOpen)}
-        className="relative size-6"
-      >
-        <img src={avatar} alt="" className="size-6" />
-        {isDropDownOpen && <DropDownList />}
-      </button>
-    );
-  };
-  const User = () => {
-    const auth = useAuth();
-    const user = auth?.user || null;
-    return user ? <LoggedIn /> : <LoggedOut />;
-  };
-
-  // Presentational components
-  const SearchBar = () => {
-    return (
-      <div className="flex items-center justify-around gap-2 bg-[#eaeaea] rounded py-1 px-2 pr-4 w-full text-sm">
-        <FaMagnifyingGlass className="size-4" />
-        <input
-          type="text"
-          className="focus:outline-none w-full     placeholder:text-xs"
-          placeholder="What are you looking for?"
-        />
-      </div>
-    );
-  };
-  const DropDownList = () => {
-    const list = [
-      {
-        name: "Dashboard",
-        link: "/",
-      },
-      {
-        name: "Orders",
-        link: "/orders",
-      },
-      {
-        name: "Cart Page",
-        link: "/cart",
-      },
-      {
-        name: "Check Out",
-        link: "/checkout",
-      },
-    ];
-    const { handleSignOut } = useAuth();
-
-    return (
-      <ul className="fixed rounded-2xl text-xs top-15 right-0 shadow-xl w-40 overflow-hidden bg-white">
-        {list.map((item) => (
-          <li
-            className="block px-2 py-2 w-full text-left font-main hover:text-primary  hover:bg-gray-200 transition-all"
-            key={item.name}
-          >
-            <Link to={item.link}>{item.name}</Link>
-          </li>
-        ))}
-        <li className="m-1 text-left font-main  " key="log out">
-          <div
-            className="cursor-pointer hover:text-red-600 transition-all w-full mb-2 text-left ml-1"
-            onClick={() => handleSignOut()}
-          >
-            Log Out
-          </div>
-        </li>
-      </ul>
-    );
-  };
 
   const cartItems = useSelector((state) => state.cart?.cartItems ?? []);
   const cartCount = cartItems.length;
@@ -108,12 +69,35 @@ const Navbar = () => {
           <Link to="/">
             <TbAlignLeft className="my-auto size-6" />
           </Link>
-          <SearchBar></SearchBar>
+          {/* Search bar */}
+          <div className="flex items-center justify-around gap-2 bg-[#eaeaea] rounded py-1 px-2 pr-4 w-full text-sm">
+            <FaMagnifyingGlass className="size-4" />
+            <input
+              type="text"
+              className="focus:outline-none w-full     placeholder:text-xs"
+              placeholder="What are you looking for?"
+            />
+          </div>
         </div>
         {/* Right side */}
         <div className="flex mx-4 gap-3">
+          {/* User Icon */}
           <div className="flex gap-2 items-center">
-            <User></User>
+            {user ? (
+              <button
+                onClick={() => setIsDropDownOpen(!isDropDownOpen)}
+                className="relative size-6"
+              >
+                <img src={avatar} alt="" className="size-6" />
+                {isDropDownOpen && <DropDownList />}
+              </button>
+            ) : (
+              <Link to="/login">
+                <button>
+                  <CiUser className="size-6" />
+                </button>
+              </Link>
+            )}
             <Link to="/wishlist" className="hidden sm:block">
               <CiHeart className="my-auto size-6" />
             </Link>

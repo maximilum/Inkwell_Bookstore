@@ -2,11 +2,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { useAuth } from "../authentication/Auth";
+import { useAuth } from "../auth/AuthContext";
 
 const Login = () => {
-  // authentication
-  const { signIn } = useAuth();
+  // auth context
+  const { signIn, signInWithGoogle } = useAuth();
   // React Hook Form
   const {
     register,
@@ -79,7 +79,7 @@ const Login = () => {
           </button>
         </form>
         <button
-          type="submit"
+          onClick={signInWithGoogle}
           className="flex justify-center gap-4  mt-[8px] w-full text-[16px] py-[12px] border text-black"
         >
           <span className=" flex justify-center items-center ">

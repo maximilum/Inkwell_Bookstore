@@ -4,12 +4,12 @@ import getBaseURL from "../utils/getBaseURL";
 const baseQuery = fetchBaseQuery({
   baseUrl: `${getBaseURL()}/api/books`,
   credentials: "include",
-  prepareHeaders: (Headers) => {
+  prepareHeaders: (headers) => {
     const token = localStorage.getItem("token");
     if (token) {
-      Headers.set("Authorization", `Bearer ${token}`);
+      headers.set("Authorization", `Bearer ${token}`);
     }
-    return Headers;
+    return headers;
   },
 });
 

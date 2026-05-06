@@ -2,30 +2,76 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import auth from "../../auth/firebase.config";
+import { useCreateOrderMutation } from "../../Redux/ordersApiSlice";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Checkout = () => {
   const { cartItems: books } = useSelector((store) => store.cart);
   const totalPrice = books
     .reduce((total, book) => (total = total + book.newPrice), 0)
     .toFixed(2);
-  const totalItems = books.reduce((total, book) => (total = total + 1), 0);
+  const totalItems = books.reduce((total) => (total = total + 1), 0);
 
-  const currentUser = true;
+  const currentUser = auth.currentUser;
   const [isChecked, setIsChecked] = useState(false);
-  const handleChange = (e) => {
-    setIsChecked(e.target.checked);
-  };
+
+  // order Api andnavigation hooks
+  const [createOrder, { isLoading, error }] = useCreateOrderMutation();
+  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
-  function onSubmit(data) {
-    console.log(data);
-  }
+  const onSubmit = async (data) => {
+    // 1. Prepare the new order
+    const email = auth.currentUser?.email;
+    const newOrder = {
+      name: data.name,
+      uid: auth.currentUser?.uid,
+      email: email,
+      address: {
+        city: data.city,
+        country: data.country,
+        state: data.state,
+        zipcode: data.zipcode,
+      },
+      phone: data.phone,
+      productIds: books.map((item) => item?._id),
+      totalPrice: totalPrice,
+    };
+    // 2. Trigger the initial Confirmation Dialog
+    const result = await Swal.fire({
+      title: "Confirm your order?",
+      text: "Do you want to save these changes?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Create Order",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        // 3. Execute mutation and unwrap the promise to catch errors
+        await createOrder(newOrder).unwrap();
+
+        await Swal.fire("Saved!", "Your order has been placed.", "success");
+        navigate("/orders");
+      } catch (error) {
+        console.log(error);
+        // [Inference] Based on standard RTK Query behavior,
+        // errors must be caught explicitly when using .unwrap()
+        Swal.fire(
+          "Error!",
+          error?.data.message || "Failed to save changes",
+          "error",
+        );
+      }
+    }
+  };
 
   return (
     <section className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
@@ -221,13 +267,13 @@ const Checkout = () => {
                         className="form-checkbox"
                       />
                       <label htmlFor="billing_same" className="ml-2 ">
-                        I am aggree to the{" "}
+                        I agree to the{" "}
                         <Link className="underline underline-offset-2 text-blue-600">
                           Terms & Conditions
                         </Link>{" "}
                         and{" "}
                         <Link className="underline underline-offset-2 text-blue-600">
-                          Shoping Policy.
+                          Shopping Policy.
                         </Link>
                       </label>
                     </div>
@@ -236,11 +282,11 @@ const Checkout = () => {
                   <div className="md:col-span-5 text-right">
                     <div className="inline-flex items-end">
                       <button
+                        type="submit"
                         disabled={!isChecked}
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        className={`${isChecked ? "bg-blue-500 hover:bg-blue-700" : "bg-blue-100"}  text-white font-bold py-2 px-4 rounded`}
                       >
-                        Place an Order
-                        <input type="submit" />
+                        Submit order
                       </button>
                     </div>
                   </div>

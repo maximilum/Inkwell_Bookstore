@@ -2,18 +2,18 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { useAuth } from "../authentication/Auth";
+import { useAuth } from "../auth/AuthContext";
 
 const Login = () => {
-  // authetication
-  const { signUp } = useAuth();
+  // Auth Context
+  const { signUp, signInWithGoogle } = useAuth();
   // React Hook Form
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = async (data) => await signUp(data.email, data.password);
+  const onSubmit = (data) => signUp(data.email, data.password);
 
   return (
     <div className="flex items-center justify-center m-[10px] h-[calc(100dvh-67px)]  ">
@@ -78,7 +78,10 @@ const Login = () => {
             Sign up
           </button>
         </form>
-        <button className=" flex justify-center gap-4  mt-[8px] w-full text-[16px] py-[12px] border text-black">
+        <button
+          onClick={signInWithGoogle}
+          className=" flex justify-center gap-4  mt-[8px] w-full text-[16px] py-[12px] border text-black"
+        >
           <span className=" flex justify-center items-center ">
             <FcGoogle />
           </span>
