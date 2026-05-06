@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import auth from "../auth/firebase.config";
+import Swal from "sweetalert2";
 
 export const getUserId = () => {
   const user = auth.currentUser;
@@ -33,7 +34,16 @@ const cartSlice = createSlice({
       if (!bookExist) {
         state.cartItems.push(action.payload);
         saveCartToLocalStorage(state.cartItems);
-      } else alert("Item already exist!");
+        Swal.fire({
+          title: "Book Added to cart!",
+          icon: "success",
+        });
+      } else {
+        Swal.fire({
+          title: "Book already exist!",
+          icon: "warning",
+        });
+      }
     },
     initiateCart: (state, action) => {
       const uid = action.payload;

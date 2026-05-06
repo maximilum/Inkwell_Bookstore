@@ -58,7 +58,8 @@ const Checkout = () => {
         // 3. Execute mutation and unwrap the promise to catch errors
         await createOrder(newOrder).unwrap();
 
-        Swal.fire("Saved!", "Your order has been placed.", "success");
+        await Swal.fire("Saved!", "Your order has been placed.", "success");
+        navigate("/orders");
       } catch (error) {
         console.log(error);
         // [Inference] Based on standard RTK Query behavior,

@@ -3,12 +3,24 @@ import getImgURL from "../../utils/ImgURLcreator";
 import { useSelector, useDispatch } from "react-redux";
 import { clearCart, deleteItem } from "../../Redux/cartSlice";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const MyCart = () => {
   const { cartItems: books } = useSelector((store) => store.cart);
   const dispatcher = useDispatch();
   const handleItemDelete = (book) => dispatcher(deleteItem(book));
-  const handleClearCart = () => dispatcher(clearCart());
+  const handleClearCart = () => {
+    Swal.fire({
+      title: "Do you want to clear the cart?",
+      showDenyButton: true,
+      confirmButtonText: "Cancel",
+      denyButtonText: `Clear`,
+    }).then((result) => {
+      if (result.isDenied) {
+        dispatcher(clearCart());
+      }
+    });
+  };
 
   if (books.length === 0) {
     return (
