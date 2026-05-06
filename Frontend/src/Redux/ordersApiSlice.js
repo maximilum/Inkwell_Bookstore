@@ -7,7 +7,7 @@ const baseQuery = fetchBaseQuery({
   prepareHeaders: (headers) => {
     const token = localStorage.getItem("token");
     if (token) {
-      headers.ser("Authorization", `Bearer ${token}`);
+      headers.set("Authorization", `Bearer ${token}`);
     }
     return headers;
   },
@@ -30,7 +30,11 @@ export const ordersApi = createApi({
 
       invalidatesTags: ["orders"],
     }),
+    getAllOrders: build.query({
+      query: (id) => `/${id}`,
+      providesTags: ["orders"],
+    }),
   }),
 });
 
-export const { useCreateOrderMutation } = ordersApi;
+export const { useCreateOrderMutation, useGetAllOrdersQuery } = ordersApi;

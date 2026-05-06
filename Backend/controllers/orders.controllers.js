@@ -1,10 +1,11 @@
 const Order = require("../models/orders.model");
+const Book = require("../models/book.model"); // Add this line
 
 const createOrder = async (req, res) => {
   const newOrder = req.body;
   const order = new Order(newOrder);
   try {
-    const addedOrder = await order.save(order);
+    const addedOrder = await order.save();
     console.log("Order Placed successfully");
     res
       .status(200)
@@ -18,9 +19,12 @@ const createOrder = async (req, res) => {
 const getAllOrders = async (req, res) => {
   const id = req.params.id;
   try {
-    const orders = await Order.find({ uid: id });
+    const orders = await Order.find({ uid: id }).populate(
+      "productIds",
+      "title",
+    );
     if (orders.length === 0) {
-      console.log();
+      console.log("no orders were found");
       return res.status(404).json({ message: "no orders were found" });
     }
     return res
