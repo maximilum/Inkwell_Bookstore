@@ -13,7 +13,6 @@ const TopSellers = () => {
     filter === "Select a genre"
       ? books
       : books.filter((book) => book.category === filter);
-  //   console.log(filteredBooks);
 
   if (isLoading) return <div>Loading...</div>;
   if (filteredBooks.length === 0) return <div>No books found</div>;

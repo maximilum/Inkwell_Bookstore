@@ -20,7 +20,7 @@ const saveCartToLocalStorage = (cart) => {
   localStorage.setItem(uid, cartItems);
 };
 const initialState = {
-  cartItems: [],
+  cartItems: loadCartItems(),
 };
 
 const cartSlice = createSlice({
@@ -32,6 +32,11 @@ const cartSlice = createSlice({
         (book) => book._id === action.payload._id,
       );
       if (!bookExist) {
+        const userId = getUserId();
+        if (!userId) {
+          alert("You need to be logged in to add items to the cart.");
+          return;
+        }
         state.cartItems.push(action.payload);
         saveCartToLocalStorage(state.cartItems);
         Swal.fire({
@@ -49,6 +54,9 @@ const cartSlice = createSlice({
       const uid = action.payload;
       const savedCartItems = getCartFromLocalStorage(uid);
       state.cartItems = savedCartItems;
+    },
+    restoreCart: (state) => {
+      state.cartItems = loadCartItems();
     },
     clearCart: (state) => {
       state.cartItems = [];
