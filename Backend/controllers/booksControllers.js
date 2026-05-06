@@ -5,7 +5,6 @@ const postBook = async (req, res) => {
   const book = req.body;
   try {
     const newBook = new Book(book);
-    console.log(newBook);
     await newBook.save();
     return res
       .status(200)
