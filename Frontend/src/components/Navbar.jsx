@@ -16,7 +16,7 @@ const DropDownList = () => {
   const list = [
     {
       name: "Dashboard",
-      link: "/",
+      link: "/dashboard",
     },
     {
       name: "Orders",
