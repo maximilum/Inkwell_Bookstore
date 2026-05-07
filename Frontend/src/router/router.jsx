@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 import App from "../App";
 import Home from "../pages/home/Home";
 import Login from "../components/Login";
@@ -10,6 +10,12 @@ import Book from "../pages/Books/Book";
 import Orders from "../pages/Cart/Orders";
 import PrivateRoute from "./PrivateRoute";
 import AdminLogin from "../components/adminLogin";
+import AddBook from "../pages/Admin Dashboard/AddBook";
+import ManageBooks from "../pages/Admin Dashboard/ManageBooks";
+import DashboardLayout from "../pages/Admin Dashboard/DashboardLayout";
+import Dashboard from "../pages/Admin Dashboard/Dashboard";
+import EditBook from "../pages/Admin Dashboard/EditBook";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -46,11 +52,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <Login></Login>,
+        element: <Login />,
       },
       {
         path: "/register",
-        element: <Register></Register>,
+        element: <Register />,
       },
       {
         path: "/books/:id",
@@ -60,7 +66,33 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <AdminLogin></AdminLogin>,
+    element: <AdminLogin />,
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <AdminRoute>
+        <DashboardLayout />
+      </AdminRoute>
+    ),
+    children: [
+      {
+        path: "",
+        element: <Dashboard />,
+      },
+      {
+        path: "manage-books",
+        element: <ManageBooks />,
+      },
+      {
+        path: "edit-book/:id",
+        element: <EditBook />,
+      },
+      {
+        path: "add-book",
+        element: <AddBook />,
+      },
+    ],
   },
 ]);
 

@@ -24,7 +24,7 @@ const Login = () => {
             },
             1000 * 60 * 180, //3 hours
           );
-          navigate("/DashboardLayout");
+          navigate("/Dashboard");
         }
       } catch (error) {
         console.log(error.message);
