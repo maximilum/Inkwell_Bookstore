@@ -17,6 +17,13 @@ const Login = () => {
         if (response.data.token) {
           const token = response.data.token;
           localStorage.setItem("token", token);
+          setTimeout(
+            () => {
+              localStorage.removeItem("token");
+              navigate("/admin");
+            },
+            1000 * 60 * 180, //3 hours
+          );
           navigate("/DashboardLayout");
         }
       } catch (error) {
