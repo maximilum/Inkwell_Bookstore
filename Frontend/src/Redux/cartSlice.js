@@ -20,7 +20,7 @@ const saveCartToLocalStorage = (cart) => {
   localStorage.setItem(uid, cartItems);
 };
 const initialState = {
-  cartItems: loadCartItems(),
+  cartItems: getCartFromLocalStorage(getUserId()),
 };
 
 const cartSlice = createSlice({

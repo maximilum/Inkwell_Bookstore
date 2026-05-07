@@ -9,6 +9,7 @@ import Checkout from "../pages/Cart/Checkout";
 import Book from "../pages/Books/Book";
 import Orders from "../pages/Cart/Orders";
 import PrivateRoute from "./PrivateRoute";
+import AdminLogin from "../components/adminLogin";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
         element: <Book></Book>,
       },
     ],
+  },
+  {
+    path: "/admin",
+    element: <AdminLogin></AdminLogin>,
   },
 ]);
 
