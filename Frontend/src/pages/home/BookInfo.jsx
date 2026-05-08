@@ -37,8 +37,8 @@ const BookInfo = ({ book }) => {
           {shownInfo}
         </p>
         <div className="flex gap-12 text-lg mb-4 tracking-wide">
-          <span className="">{price}</span>
-          <span className="text-gray-500 line-through">{price2}</span>
+          <span className="">${price}</span>
+          <span className="text-gray-500 line-through">${price2}</span>
         </div>
         <div onClick={() => dispatch(addItemToCart(book))}>
           <Button>

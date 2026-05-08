@@ -15,7 +15,7 @@ const Recommended = () => {
         className={`w-11/12 mx-auto  flex gap-32 overflow-auto ${styles.carousel2}`}
       >
         {books.slice(8, 16).map((book, index) => (
-          <BookInfo key={index} book={book} path="books" />
+          <BookInfo key={index} book={book} />
         ))}
       </div>
     </div>

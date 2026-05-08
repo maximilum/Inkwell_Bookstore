@@ -59,11 +59,7 @@ const MyCart = () => {
             <div className="flex">
               {/* Book Cover Image */}
               <div className="image-cover">
-                <img
-                  className="h-32 w-30"
-                  src={`${getImgURL("books", book.coverImage)}`}
-                  alt=""
-                />
+                <img className="h-32 w-30" src={book.coverImage} alt="" />
               </div>
               {/* Book Info */}
               <div className="ml-2 py-4 px-6 sm:ml-4 flex flex-col justify-between w-full">

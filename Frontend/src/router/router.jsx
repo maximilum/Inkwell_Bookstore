@@ -3,7 +3,6 @@ import App from "../App";
 import Home from "../pages/home/Home";
 import Login from "../components/Login";
 import Register from "../components/Register";
-import Cart from "../pages/Cart/Cart";
 import MyCart from "../pages/Cart/MyCart";
 import Checkout from "../pages/Cart/Checkout";
 import Book from "../pages/Books/Book";
