@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useFormik } from "formik";
 import { useAddBookMutation } from "../../Redux/booksApiSlice";
 import Swal from "sweetalert2";
+import axios from "axios";
+import getBaseURL from "../../utils/getBaseURL";
 
 const AddBook = () => {
   const formik = useFormik({
@@ -21,7 +23,7 @@ const AddBook = () => {
         trending: Array.isArray(data.trending)
           ? data.trending.length > 0
           : Boolean(data.trending),
-        coverImage: imageFileName,
+        coverImage: imageURL,
       };
       try {
         await addBook(newBookData).unwrap();
@@ -35,8 +37,10 @@ const AddBook = () => {
           confirmButtonText: "Yes, It's Okay!",
         });
         formik.resetForm();
-        setimageFileName("");
-        setimageFile(null);
+        setimageURL("");
+        if (fileInputRef.current) {
+          fileInputRef.current.value = "";
+        }
       } catch (error) {
         console.error("Full error:", error);
         const errorMessage =
@@ -45,15 +49,33 @@ const AddBook = () => {
       }
     },
   });
-  const [imageFile, setimageFile] = useState(null);
-  const [addBook, { isLoading, isError }] = useAddBookMutation();
-  const [imageFileName, setimageFileName] = useState("");
 
-  const handleFileChange = (e) => {
+  const [addBook, { isLoading, isError }] = useAddBookMutation();
+  const [imageURL, setimageURL] = useState("");
+  const fileInputRef = useRef(null);
+  const [imageError, setImageError] = useState("");
+  const [isImageLoading, setIsImageLoading] = useState(false);
+
+  const handleImageUpload = async (e) => {
     const file = e.target.files[0];
+    setImageError("");
+
     if (file) {
-      setimageFile(file);
-      setimageFileName(file.name);
+      try {
+        setIsImageLoading(true);
+        const formData = new FormData();
+        formData.append("image", file);
+        const res = await axios.post(`${getBaseURL()}/api/images`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        setimageURL(res.data.url);
+      } catch (error) {
+        setImageError(error.message);
+      } finally {
+        setIsImageLoading(false);
+      }
     }
   };
   return (
@@ -180,12 +202,17 @@ const AddBook = () => {
           <input
             type="file"
             accept="image/*"
-            onChange={handleFileChange}
+            ref={fileInputRef}
+            onChange={handleImageUpload}
             className="mb-2 w-full"
           />
-          {imageFileName && (
-            <p className="text-sm text-gray-500">Selected: {imageFileName}</p>
+          {isImageLoading && (
+            <p className="text-sm text-gray-500">Uploading...</p>
           )}
+          {imageError && (
+            <p className="text-sm text-red-500">cant upload image</p>
+          )}
+          {imageURL && <img src={imageURL} alt="" className="h-25 w-18" />}
         </div>
 
         {/* Submit Button */}

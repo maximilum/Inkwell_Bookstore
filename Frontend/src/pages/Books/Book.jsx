@@ -22,8 +22,8 @@ const Book = () => {
   return (
     <div className="my-4 mx-auto flex p-8 flex-col justify-center items-baseline gap-3 w-[800px] shadow-2xl">
       <img
-        src={`${getImgURL("books", book.coverImage)}`}
-        alt=""
+        src={book.coverImage}
+        alt={book.title}
         className="h-64 mb-4 bg-cover cursor-pointer hover:scale-105 transition-all duration-200"
       />
       <h1 className="text-2xl font-bold ">{book.title}</h1>

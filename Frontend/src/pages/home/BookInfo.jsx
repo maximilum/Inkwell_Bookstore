@@ -6,8 +6,9 @@ import styles from "./carouselCard.module.css";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../Redux/cartSlice";
 
-const BookInfo = ({ book, path }) => {
+const BookInfo = ({ book }) => {
   const dispatch = useDispatch();
+  console.log(book.coverImage);
 
   const title = book.title;
   const shownTitle = title.length < 20 ? title : `${title.slice(0, 20)}...`;
@@ -21,8 +22,8 @@ const BookInfo = ({ book, path }) => {
       <div className="w-45 h-62.5">
         <Link to={`/books/${book._id}`}>
           <img
-            src={`${getImgURL(path, book.coverImage)}`}
-            alt=""
+            src={book.coverImage}
+            alt={book.title}
             className="h-full w-full bg-cover cursor-pointer hover:scale-105 transition-all duration-200"
           />
         </Link>
