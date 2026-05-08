@@ -15,34 +15,14 @@ const DashboardLayout = () => {
   return (
     <section className="flex md:bg-gray-100 min-h-screen overflow-hidden">
       <aside className="hidden sm:flex sm:flex-col">
-        <a
-          href="/"
-          className="inline-flex items-center justify-center h-20 w-20 bg-purple-600 hover:bg-purple-500 focus:bg-purple-500"
+        <Link
+          to="/"
+          className="inline-flex items-center justify-center h-20 w-20 bg-yellow-500 hover:bg-yellow-400 focus:bg-yellow-400 shadow-sm"
         >
           <img src="/fav-icon.png" alt="" />
-        </a>
+        </Link>
         <div className="flex-grow flex flex-col justify-between text-gray-500 bg-gray-800">
           <nav className="flex flex-col mx-4 my-6 space-y-4">
-            <a
-              href="#"
-              className="inline-flex items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg"
-            >
-              <span className="sr-only">Folders</span>
-              <svg
-                aria-hidden="true"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                className="h-6 w-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
-                />
-              </svg>
-            </a>
             <Link
               to="/dashboard"
               className="inline-flex items-center justify-center py-3 text-purple-600 bg-white rounded-lg"
@@ -106,7 +86,7 @@ const DashboardLayout = () => {
         </div>
       </aside>
       <div className="flex-grow text-gray-800">
-        <header className="flex items-center h-20 px-6 sm:px-10 bg-white">
+        <header className="flex items-center h-20 px-6 sm:px-10 bg-white shadow-lg">
           <button className="block sm:hidden relative flex-shrink-0 p-2 mr-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800 focus:bg-gray-100 focus:text-gray-800 rounded-full">
             <span className="sr-only">Menu</span>
             <svg
