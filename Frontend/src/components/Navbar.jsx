@@ -7,7 +7,8 @@ import { MdReceiptLong } from "react-icons/md";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import avatar from "../assets/avatar.png";
+import avatar from "../assets/avatar.png"; //
+// import store from "../Redux/store.js";
 import { useSelector } from "react-redux";
 import { useAuth } from "../auth/AuthContext";
 
