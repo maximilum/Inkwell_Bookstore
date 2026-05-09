@@ -4,11 +4,12 @@ import {
   useGetAllBooksQuery,
 } from "../../Redux/booksApiSlice";
 import { Link, useNavigate } from "react-router-dom";
+import PlainLoading from "../../components/LoadingScreen/Plain_Loading";
 
 const ManageBooks = () => {
   const navigate = useNavigate();
 
-  const { data, refetch } = useGetAllBooksQuery();
+  const { data, refetch, isLoading } = useGetAllBooksQuery();
   const books = data?.data || [];
 
   const [deleteBook] = useDeleteBookMutation();
@@ -29,6 +30,7 @@ const ManageBooks = () => {
   const handleEditClick = (id) => {
     navigate(`dashboard/edit-book/${id}`);
   };
+  if (isLoading) return <PlainLoading />;
   return (
     <section className="py-1 bg-blueGray-50">
       <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-8">
@@ -51,7 +53,7 @@ const ManageBooks = () => {
             </div>
           </div>
 
-          <div className="block w-full overflow-x-auto">
+          <div className="block w-full overflow-x-hidden">
             <table className="items-center bg-transparent w-full border-collapse ">
               <thead>
                 <tr>

@@ -15,6 +15,7 @@ import DashboardLayout from "../pages/Admin Dashboard/DashboardLayout";
 import Dashboard from "../pages/Admin Dashboard/Dashboard";
 import EditBook from "../pages/Admin Dashboard/EditBook";
 import AdminRoute from "./AdminRoute";
+import Discover from "../pages/Discover/Discover";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: "/books/:id",
         element: <Book></Book>,
+      },
+      {
+        path: "/discover",
+        element: <Discover />,
       },
     ],
   },

@@ -1,7 +1,10 @@
 import React from "react";
 import Button from "../../components/Button";
 import BannerImage from "../../assets/Banner.png";
+import { Link, useNavigate } from "react-router-dom";
+
 const HeroSection = () => {
+  const navigate = useNavigate();
   return (
     <div className="h-screen w-screen flex flex-col">
       <div className="w-screen h-16 "></div>
@@ -18,11 +21,13 @@ const HeroSection = () => {
               thrillers to captivating memoirs, this week's new releases offer
               something for everyone
             </p>
-            <Button>
-              <span className="h-6 w-24 flex justify-center items-center ">
-                Discover
-              </span>
-            </Button>
+            <Link to={"/discover"}>
+              <Button>
+                <span className="h-6 w-24 flex justify-center items-center ">
+                  Discover
+                </span>
+              </Button>
+            </Link>
           </div>
           {/* Right Container */}
           <div className="w-1/2 flex justify-end items-center">

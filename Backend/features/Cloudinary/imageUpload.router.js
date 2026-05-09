@@ -20,8 +20,10 @@ route.post("/", upload.single("image"), (req, res) => {
       tags: ["book", "cover"],
     },
     (error, result) => {
-      if (error)
-        return res.status(400).json({ message: "error uploading image" });
+      if (error) {
+        console.log(error);
+        return res.status(400).json({ message: error.message });
+      }
       return res.status(200).json({
         message: "image uploaded successfully",
         url: result.secure_url,
