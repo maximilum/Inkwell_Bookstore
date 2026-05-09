@@ -68,40 +68,40 @@ const Navbar = () => {
 
   return (
     <div className=" sticky top-0 w-full bg-white shadow-lg z-50">
-      <nav className=" flex justify-between mx-auto max-w-screen-2xl h-20 items-center">
+      <nav className=" flex justify-between mx-auto max-w-screen-2xl h-15 sm:h-20 items-center">
         {/* Left side */}
         <div className="flex mx-4 h-full">
-          <div className="hover:bg-gray-200 transition-all h-full flex items-center px-4">
+          <div className="hover:bg-gray-200 transition-all h-full flex items-center justify-center w-12 sm:w-20 px-4">
             <Link to="/" className="flex flex-col items-center ">
-              <IoLibraryOutline className="my-auto size-6" />
-              <p>Home</p>
+              <IoLibraryOutline className="my-auto size-4 sm:size-6" />
+              <p className="text-xs sm:text-base">Home</p>
             </Link>
           </div>
-          <div className="hover:bg-gray-200 transition-all h-full flex items-center px-4">
+          <div className="hover:bg-gray-200 transition-all h-full flex items-center justify-center w-12 sm:w-20 px-4">
             <Link
               to="/discover"
               className="text-md text-black flex flex-col items-center "
             >
-              <GiMagnifyingGlass className="my-auto size-6" />
-              <p>Discover</p>
+              <GiMagnifyingGlass className="my-auto size-4 sm:size-6" />
+              <p className="text-xs sm:text-base">Discover</p>
             </Link>
           </div>
-          <div className="hover:bg-gray-200 transition-all h-full flex items-center px-4">
+          <div className="hover:bg-gray-200 transition-all h-full flex items-center justify-center w-12 sm:w-20 px-4">
             <Link
               to="/orders"
               className="text-md text-black flex flex-col items-center "
             >
-              <MdReceiptLong className="my-auto size-6" />
-              <p>Orders</p>
+              <MdReceiptLong className="my-auto size-4 sm:size-6" />
+              <p className="text-xs sm:text-base">Orders</p>
             </Link>
           </div>
-          <div className="hover:bg-gray-200 transition-all h-full flex items-center px-4">
+          <div className="hover:bg-gray-200 transition-all h-full flex items-center justify-center w-12 sm:w-20 px-4">
             <Link
               to="/cart"
               className="text-md text-black flex flex-col items-center "
             >
-              <AiOutlineShoppingCart className="my-auto size-6" />
-              <p>Cart</p>
+              <AiOutlineShoppingCart className="my-auto size-4 sm:size-6" />
+              <p className="text-xs sm:text-base">Cart</p>
             </Link>
           </div>
 
@@ -145,9 +145,11 @@ const Navbar = () => {
           </div>
           <Link to="/cart">
             <Button>
-              <AiOutlineShoppingCart className="my-auto size-6 " />
+              <AiOutlineShoppingCart className="my-auto size-4 sm:size-6 " />
               <span>{cartCount}</span>
-              <span className=" my-auto leading-0">Basket</span>
+              <span className=" my-auto leading-0  sm:block hidden">
+                Basket
+              </span>
             </Button>
           </Link>
         </div>
