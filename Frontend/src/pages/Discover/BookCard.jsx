@@ -9,18 +9,20 @@ const BookCard = ({ book }) => {
   const dispatch = useDispatch();
   const { title, coverImage, _id } = book;
   return (
-    <div className="block overflow-hidden border border-[#dcd9d9] shadow-lg hover:shadow-sm hover:scale-99 transition-all">
+    <div className="block  overflow-hidden border border-[#dcd9d9] shadow-lg hover:shadow-sm hover:scale-99 transition-all">
       {/* Image Container with 18:25 Aspect Ratio */}
       <div
         className="relative w-full overflow-hidden"
         style={{ aspectRatio: "18/25" }}
       >
         {/* image */}
-        <img
-          src={coverImage}
-          alt={title}
-          className="w-full h-full absolute inset-0"
-        />
+        <Link to={`/books/${book._id}`}>
+          <img
+            src={coverImage}
+            alt={title}
+            className="w-full h-full absolute inset-0"
+          />
+        </Link>
         {/* Category Tag */}
         <div className="absolute top-4 left-4 bg-black/60 text-white text-[12px] tracking-widest px-3 py-1 uppercase font-sans">
           {book.category}

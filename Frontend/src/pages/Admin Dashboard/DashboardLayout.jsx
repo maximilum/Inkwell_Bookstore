@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate, ScrollRestoration } from "react-router-dom";
 import { HiViewGridAdd } from "react-icons/hi";
 import { MdOutlineManageHistory } from "react-icons/md";
 
@@ -244,6 +244,7 @@ const DashboardLayout = () => {
             </div>
           </div>
           <Outlet />
+          <ScrollRestoration />
         </main>
       </div>
     </section>

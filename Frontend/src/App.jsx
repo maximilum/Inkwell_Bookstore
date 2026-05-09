@@ -1,5 +1,5 @@
 import "./App.css";
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 import { FaAlignLeft } from "react-icons/fa";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -14,6 +14,7 @@ function App() {
         <div className="font-main">
           <Outlet />
         </div>
+        <ScrollRestoration />
         <footer>
           <Footer></Footer>
         </footer>

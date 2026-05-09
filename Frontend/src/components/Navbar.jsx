@@ -1,11 +1,12 @@
-import { TbAlignLeft } from "react-icons/tb";
+import Button from "./Button.jsx";
 import { CiUser } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
-import Button from "./Button.jsx";
-import { FaMagnifyingGlass } from "react-icons/fa6";
+import { GiMagnifyingGlass } from "react-icons/gi";
+import { IoLibraryOutline } from "react-icons/io5";
+import { MdReceiptLong } from "react-icons/md";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { AiOutlineShoppingCart } from "react-icons/ai";
 import avatar from "../assets/avatar.png"; //
 // import store from "../Redux/store.js";
 import { useSelector } from "react-redux";
@@ -17,6 +18,10 @@ const DropDownList = () => {
     {
       name: "Dashboard",
       link: "/dashboard",
+    },
+    {
+      name: "Discover",
+      link: "/discover",
     },
     {
       name: "Orders",
@@ -63,13 +68,49 @@ const Navbar = () => {
 
   return (
     <div className=" sticky top-0 w-full bg-white shadow-lg z-50">
-      <nav className=" flex justify-between mx-auto max-w-screen-2xl p-4 items-center">
+      <nav className=" flex justify-between mx-auto max-w-screen-2xl h-20 items-center">
         {/* Left side */}
-        <div className="flex mx-4 gap-4 sm:gap-16">
-          <Link to="/">
-            <TbAlignLeft className="my-auto size-6" />
-          </Link>
-          {/* Search bar */}
+        <div className="flex mx-4 h-full">
+          <div className="hover:bg-gray-200 transition-all h-full flex items-center px-4">
+            <Link to="/" className="flex flex-col items-center ">
+              <IoLibraryOutline className="my-auto size-6" />
+              <p>Home</p>
+            </Link>
+          </div>
+          <div className="hover:bg-gray-200 transition-all h-full flex items-center px-4">
+            <Link
+              to="/discover"
+              className="text-md text-black flex flex-col items-center "
+            >
+              <GiMagnifyingGlass className="my-auto size-6" />
+              <p>Discover</p>
+            </Link>
+          </div>
+          <div className="hover:bg-gray-200 transition-all h-full flex items-center px-4">
+            <Link
+              to="/orders"
+              className="text-md text-black flex flex-col items-center "
+            >
+              <MdReceiptLong className="my-auto size-6" />
+              <p>Orders</p>
+            </Link>
+          </div>
+          <div className="hover:bg-gray-200 transition-all h-full flex items-center px-4">
+            <Link
+              to="/cart"
+              className="text-md text-black flex flex-col items-center "
+            >
+              <AiOutlineShoppingCart className="my-auto size-6" />
+              <p>Cart</p>
+            </Link>
+          </div>
+
+          {/* <div>
+            <Link to="/wishlist" className="text-md text-black">
+              Wishlist
+            </Link>
+          </div> */}
+          {/* Search bar
           <div className="flex items-center justify-around gap-2 bg-[#eaeaea] rounded py-1 px-2 pr-4 w-full text-sm">
             <FaMagnifyingGlass className="size-4" />
             <input
@@ -77,7 +118,7 @@ const Navbar = () => {
               className="focus:outline-none w-full     placeholder:text-xs"
               placeholder="What are you looking for?"
             />
-          </div>
+          </div> */}
         </div>
         {/* Right side */}
         <div className="flex mx-4 gap-3">
