@@ -80,7 +80,7 @@ const editBook = async (req, res) => {
   }
   try {
     const updatedBook = await Book.findByIdAndUpdate(id, update, {
-      returnDocument: "after",
+      new: true,
     });
     if (!updatedBook) {
       return res

@@ -4,6 +4,8 @@ import { useAddBookMutation } from "../../Redux/booksApiSlice";
 import Swal from "sweetalert2";
 import axios from "axios";
 import getBaseURL from "../../utils/getBaseURL";
+import useCategories from "../../utils/useCategories";
+import capitalize from "../../utils/Capitalize";
 
 const AddBook = () => {
   const formik = useFormik({
@@ -51,6 +53,17 @@ const AddBook = () => {
   });
 
   const [addBook, { isLoading, isError }] = useAddBookMutation();
+
+  // Categories
+  const { categories } = useCategories();
+  let categoriesArray = categories?.map((c) => ({
+    value: c,
+    label: capitalize(c),
+  }));
+
+  categoriesArray?.unshift({ value: "", label: "Choose A Category" });
+
+  // Image states
   const [imageURL, setimageURL] = useState("");
   const fileInputRef = useRef(null);
   const [imageError, setImageError] = useState("");
@@ -126,15 +139,7 @@ const AddBook = () => {
             value={formik.values.category}
             className="w-full p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
           >
-            {[
-              { value: "", label: "Choose A Category" },
-              { value: "business", label: "Business" },
-              { value: "technology", label: "Technology" },
-              { value: "fiction", label: "Fiction" },
-              { value: "horror", label: "Horror" },
-              { value: "adventure", label: "Adventure" },
-              // Add more options as needed
-            ].map((option) => (
+            {categoriesArray?.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>

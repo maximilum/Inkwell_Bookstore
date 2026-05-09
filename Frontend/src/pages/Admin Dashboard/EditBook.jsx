@@ -8,6 +8,8 @@ import {
 import Swal from "sweetalert2";
 import axios from "axios";
 import getBaseURL from "../../utils/getBaseURL";
+import useCategories from "../../utils/useCategories";
+import capitalize from "../../utils/Capitalize";
 
 const EditBook = () => {
   const { id } = useParams();
@@ -20,6 +22,7 @@ const EditBook = () => {
     }
   }, [book]);
 
+  // Formik
   const formik = useFormik({
     initialValues: {
       title: book?.title || "",
@@ -42,7 +45,6 @@ const EditBook = () => {
         coverImage: imageURL,
       };
       try {
-        console.log({ id, update: newBookData });
         await updateBook({ id, update: newBookData }).unwrap();
         Swal.fire({
           title: "Book updated",
@@ -66,12 +68,23 @@ const EditBook = () => {
       }
     },
   });
+
+  // Categories
+  const { categories } = useCategories();
+  const categoriesArray = categories?.map((c) => ({
+    value: c,
+    label: capitalize(c),
+  }));
+  categoriesArray?.unshift({ value: "", label: "Choose A Category" });
+
+  // image states
   const [updateBook, { isLoading, isError }] = useUpdateBookMutation();
   const [imageURL, setimageURL] = useState(book?.coverImage);
   const fileInputRef = useRef(null);
   const [imageError, setImageError] = useState("");
   const [isImageLoading, setIsImageLoading] = useState(false);
 
+  // Image Upload handler
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     setImageError("");
