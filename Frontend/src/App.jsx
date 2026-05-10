@@ -8,9 +8,7 @@ function App() {
   return (
     <>
       <AuthProvider>
-        <header>
-          <Navbar></Navbar>
-        </header>
+        <Navbar />
         <div className="font-main">
           <Outlet />
         </div>

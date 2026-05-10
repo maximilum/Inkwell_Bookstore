@@ -25,13 +25,10 @@ const MyCart = () => {
   if (books.length === 0) {
     return (
       <Link to="/">
-        <div className="flex flex-col justify-center items-center gap-8 w-full h-full mb-8 mt-8">
+        <div className="flex flex-col justify-center items-center gap-8 w-full h-[calc(100vh-4rem)] mb-8 mt-8">
           <div>
             <img className="w-64 sm:w-96" src="/EmptyCart.png" alt="" />
           </div>
-          <h1 className="text-2xl sm:text-4xl font-emptyCart text-[#72c4e7]">
-            Cart is empty
-          </h1>
         </div>
       </Link>
     );

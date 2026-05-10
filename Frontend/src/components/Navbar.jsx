@@ -5,14 +5,17 @@ import { GiMagnifyingGlass } from "react-icons/gi";
 import { IoLibraryOutline } from "react-icons/io5";
 import { MdReceiptLong } from "react-icons/md";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { TbHeartStar } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import avatar from "../assets/avatar.png"; //
 // import store from "../Redux/store.js";
 import { useSelector } from "react-redux";
 import { useAuth } from "../auth/AuthContext";
+import { useLocation } from "react-router-dom";
 
 const DropDownList = () => {
+  const [currentLocation, setCurrentLocation] = useState("");
   const { handleSignOut } = useAuth();
   const list = [
     {
@@ -63,21 +66,35 @@ const Navbar = () => {
   // States
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
+  const location = useLocation();
+  const path = location.pathname.split("/")[1];
+
   const cartItems = useSelector((state) => state.cart?.cartItems ?? []);
   const cartCount = cartItems.length;
 
   return (
-    <div className=" sticky top-0 w-full bg-white shadow-lg z-50">
-      <nav className=" flex justify-between mx-auto max-w-screen-2xl h-15 sm:h-20 items-center">
-        {/* Left side */}
-        <div className="flex mx-4 h-full">
-          <div className="hover:bg-gray-200 transition-all h-full flex items-center justify-center w-12 sm:w-20 px-4">
+    <header className=" sticky top-0 w-full bg-white shadow-lg z-50">
+      <nav className=" flex justify-around mx-auto max-w-screen-2xl h-15 sm:h-17 items-center">
+        {/* Left Side */}
+        <div className="px-2 sm:px-4">
+          <h1 className="text-xs sm:text-3xl md:text-4xl text-black ">
+            INKWELL
+          </h1>
+        </div>
+
+        {/* Center */}
+        <div className="flex mx-1 sm:mx-4 h-full">
+          <div
+            className={`hover:bg-gray-200 transition-colors h-full flex items-center justify-center w-12 sm:w-20 px-4 ${path === "" ? "border-b-2" : ""}`}
+          >
             <Link to="/" className="flex flex-col items-center ">
               <IoLibraryOutline className="my-auto size-4 sm:size-6" />
               <p className="text-xs sm:text-base">Home</p>
             </Link>
           </div>
-          <div className="hover:bg-gray-200 transition-all h-full flex items-center justify-center w-12 sm:w-20 px-4">
+          <div
+            className={`hover:bg-gray-200 transition-colors h-full flex items-center justify-center w-12 sm:w-20 px-4 ${path === "discover" ? "border-b-2" : ""}`}
+          >
             <Link
               to="/discover"
               className="text-md text-black flex flex-col items-center "
@@ -86,7 +103,9 @@ const Navbar = () => {
               <p className="text-xs sm:text-base">Discover</p>
             </Link>
           </div>
-          <div className="hover:bg-gray-200 transition-all h-full flex items-center justify-center w-12 sm:w-20 px-4">
+          <div
+            className={`hover:bg-gray-200 transition-colors h-full flex items-center justify-center w-12 sm:w-20 px-4 ${path === "orders" ? "border-b-2" : ""}`}
+          >
             <Link
               to="/orders"
               className="text-md text-black flex flex-col items-center "
@@ -95,13 +114,26 @@ const Navbar = () => {
               <p className="text-xs sm:text-base">Orders</p>
             </Link>
           </div>
-          <div className="hover:bg-gray-200 transition-all h-full flex items-center justify-center w-12 sm:w-20 px-4">
+          <div
+            className={`hover:bg-gray-200 transition-colors h-full flex items-center justify-center w-12 sm:w-20 px-4 ${path === "cart" ? "border-b-2" : ""}`}
+          >
             <Link
               to="/cart"
               className="text-md text-black flex flex-col items-center "
             >
               <AiOutlineShoppingCart className="my-auto size-4 sm:size-6" />
               <p className="text-xs sm:text-base">Cart</p>
+            </Link>
+          </div>
+          <div
+            className={`hover:bg-gray-200 transition-colors h-full flex items-center justify-center w-12 sm:w-20 px-4 ${path === "wishlist" ? "border-b-2" : ""}`}
+          >
+            <Link
+              to="/wishlist"
+              className="text-md text-black flex flex-col items-center "
+            >
+              <TbHeartStar className="my-auto size-4 sm:size-6 font-bold" />
+              <p className="text-xs sm:text-base">Wishlist</p>
             </Link>
           </div>
 
@@ -121,7 +153,7 @@ const Navbar = () => {
           </div> */}
         </div>
         {/* Right side */}
-        <div className="flex mx-4 gap-3">
+        <div className="flex mx-2 sm:mx-4 gap-1 sm:gap-3">
           {/* User Icon */}
           <div className="flex gap-2 items-center">
             {user ? (
@@ -139,22 +171,17 @@ const Navbar = () => {
                 </button>
               </Link>
             )}
-            <Link to="/wishlist" className="hidden sm:block">
-              <CiHeart className="my-auto size-6" />
-            </Link>
           </div>
           <Link to="/cart">
             <Button>
               <AiOutlineShoppingCart className="my-auto size-4 sm:size-6 " />
               <span>{cartCount}</span>
-              <span className=" my-auto leading-0  sm:block hidden">
-                Basket
-              </span>
+              <span className=" my-auto leading-0  sm:block hidden">Cart</span>
             </Button>
           </Link>
         </div>
       </nav>
-    </div>
+    </header>
   );
 };
 

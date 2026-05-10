@@ -8,7 +8,6 @@ import { addItemToCart } from "../../Redux/cartSlice";
 
 const BookInfo = ({ book }) => {
   const dispatch = useDispatch();
-  console.log(book.coverImage);
 
   const title = book.title;
   const shownTitle = title.length < 20 ? title : `${title.slice(0, 20)}...`;
