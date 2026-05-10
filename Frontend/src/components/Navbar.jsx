@@ -73,7 +73,7 @@ const Navbar = () => {
   const cartCount = cartItems.length;
 
   return (
-    <header className=" sticky top-0 w-full bg-white shadow-lg z-50">
+    <header className="fixed top-0 w-full bg-white shadow-lg z-50">
       <nav className=" flex justify-around mx-auto max-w-screen-2xl h-15 sm:h-17 items-center">
         {/* Left Side */}
         <div className="px-2 sm:px-4">

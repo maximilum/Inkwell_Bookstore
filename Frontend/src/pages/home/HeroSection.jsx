@@ -1,41 +1,44 @@
 import React from "react";
-import Button from "../../components/Button";
 import BannerImage from "../../assets/Banner.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { PiArrowBendDownRightThin } from "react-icons/pi";
+import texture from "../../assets/texture.jpg";
 
 const HeroSection = () => {
-  const navigate = useNavigate();
   return (
-    <div className="h-screen w-screen flex flex-col">
-      <div className="w-screen h-16 "></div>
-      <div className="grow flex items-center justify-center">
-        <div className="m-12 grow max-w-screen-2xl flex flex-col-reverse gap-32 sm:gap-0 sm:flex-row items-center justify-between ">
+    <>
+      <div className="h-[60px] sm:h-[67px]  w-full"></div>
+      <div
+        style={{ backgroundImage: `url(${texture})` }}
+        className="h-[calc(100vh-60px)] w-full flex justify-center items-center bg-repeat bg-cover"
+      >
+        <div className="m-12 max-w-screen-2xl h-full flex flex-col-reverse gap-24  sm:flex-row items-center justify-around ">
           {/* Left Container */}
-          <div className="flex flex-col gap-10 ">
-            <h1 className="text-2xl md:text-5xl font-medium">
-              New Releases This Week
-            </h1>
-            <p className="text-lg max-w-md leading-6">
-              It's time to update your reading list with some of the latest and
-              greatest releases in the literary world. From heart-pumping
-              thrillers to captivating memoirs, this week's new releases offer
-              something for everyone
-            </p>
+          <div className="flex flex-col h-full gap-48 justify-center ">
+            <div className="flex flex-col gap-2">
+              <h1 className="text-5xl md:text-8xl font-extrabold sansation-bold text-[#001325]">
+                INKWELL
+              </h1>
+              <p className="text-lg max-w-md leading-6 font-light text-white sansation-light ">
+                where Great Books Begin Again
+              </p>
+            </div>
             <Link to={"/discover"}>
-              <Button>
-                <span className="h-6 w-24 flex justify-center items-center ">
-                  Discover
+              <div className="flex gap-4 cursor-pointer hover:gap-6 transition-all">
+                <PiArrowBendDownRightThin size={36} className="text-white" />
+                <span className=" flex justify-center items-center sansation-bold">
+                  Browse Books
                 </span>
-              </Button>
+              </div>
             </Link>
           </div>
           {/* Right Container */}
-          <div className="w-1/2 flex justify-end items-center">
-            <img src={BannerImage} alt="" />
+          <div className=" h-full flex justify-end items-center object-cover hidden sm:block">
+            <img src={BannerImage} alt="" className="w-90 h-125 object-cover" />
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

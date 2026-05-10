@@ -12,3 +12,7 @@
   --color-blackBG: #f3f3f3;
   --color-Favorite: #ff5841;
 }
+
+html, body {
+  overflow-x: hidden;
+}

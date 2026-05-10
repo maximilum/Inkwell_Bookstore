@@ -1,12 +1,13 @@
 import React from "react";
 import auth from "../../auth/firebase.config";
 import { useGetAllOrdersQuery } from "../../Redux/ordersApiSlice";
+import PlainLoading from "../../components/LoadingScreen/Plain_Loading";
 
 const Orders = () => {
   const id = auth.currentUser?.uid;
-  const { data, error, isLoading } = useGetAllOrdersQuery(id);
+  const { data, isLoading } = useGetAllOrdersQuery(id);
   const orders = data?.data;
-  console.log(orders);
+  if (isLoading) return <PlainLoading />;
   if (orders === undefined)
     return (
       <div className="min-h-screen flex justify-center items-center text-4xl">
@@ -15,6 +16,7 @@ const Orders = () => {
     );
   return (
     <>
+      <div className="h-[60px] sm:h-[67px]  w-full"></div>
       <div className="flex flex-col justify-start w-full min-h-screen p-8">
         <h1 className="text-2xl mb-8">orders</h1>
         {orders?.map((order, index) => (

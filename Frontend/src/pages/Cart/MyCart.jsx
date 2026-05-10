@@ -37,6 +37,7 @@ const MyCart = () => {
   return (
     // Container
     <div className="mx-4 my-8 sm:mx-16 sm:my-16">
+      <div className="h-[60px] sm:h-[67px]  w-full"></div>
       {/* Layer 1 */}
       <div className="flex justify-between">
         <h2 className="text-lg">Shopping Cart</h2>
