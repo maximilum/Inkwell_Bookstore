@@ -10,7 +10,7 @@ import { HiOutlinePlusSm } from "react-icons/hi";
 
 const NAV_LINKS = [
   {
-    to: "/dashboard/manage-books",
+    to: "/dashboard",
     icon: IoLibraryOutline,
     label: "Manage Books",
   },
@@ -89,8 +89,10 @@ const DashboardLayout = () => {
           <nav className="flex flex-col items-center gap-1 py-4 px-2 flex-1">
             {NAV_LINKS.map(({ to, icon: Icon, label }) => {
               const active =
-                location.pathname === to ||
-                location.pathname.startsWith(to + "/");
+                to === "/dashboard"
+                  ? location.pathname === "/dashboard"
+                  : location.pathname === to ||
+                    location.pathname.startsWith(to + "/");
               return (
                 <Link
                   key={to}
