@@ -24,6 +24,7 @@ const BookInfo = ({ book }) => {
             src={book.coverImage}
             alt={book.title}
             className="h-full w-full bg-cover cursor-pointer hover:scale-105 transition-all duration-200"
+            loading="lazy"
           />
         </Link>
       </div>

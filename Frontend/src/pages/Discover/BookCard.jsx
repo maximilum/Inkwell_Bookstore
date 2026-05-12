@@ -25,6 +25,7 @@ const BookCard = ({ book }) => {
             src={coverImage}
             alt={title}
             className="w-full h-full object-contain"
+            loading="lazy"
           />
         </Link>
         <div className="absolute top-2.5 left-2.5 bg-black/55 text-white text-[10px] tracking-widest px-2 py-0.5 uppercase">
