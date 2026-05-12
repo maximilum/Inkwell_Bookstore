@@ -1,23 +1,23 @@
 import React from "react";
 import getImgURL from "../../utils/ImgURLcreator";
 import { useSelector, useDispatch } from "react-redux";
-import { clearCart, deleteItem } from "../../Redux/cartSlice";
+import { clearShelf, deleteItem } from "../../Redux/shelfSlice";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const MyCart = () => {
-  const { cartItems: books } = useSelector((store) => store.cart);
+const MyShelf = () => {
+  const { shelfItems: books } = useSelector((store) => store.shelf);
   const dispatcher = useDispatch();
   const handleItemDelete = (book) => dispatcher(deleteItem(book));
-  const handleClearCart = () => {
+  const handleClearShelf = () => {
     Swal.fire({
-      title: "Do you want to clear the cart?",
+      title: "Do you want to clear the shelf?",
       showDenyButton: true,
       confirmButtonText: "Cancel",
       denyButtonText: `Clear`,
     }).then((result) => {
       if (result.isDenied) {
-        dispatcher(clearCart());
+        dispatcher(clearShelf());
       }
     });
   };
@@ -40,12 +40,12 @@ const MyCart = () => {
       <div className="h-[60px] sm:h-[67px]  w-full"></div>
       {/* Layer 1 */}
       <div className="flex justify-between">
-        <h2 className="text-lg">Shopping Cart</h2>
+        <h2 className="text-lg">My Shelf</h2>
         <button
-          onClick={() => handleClearCart()}
+          onClick={() => handleClearShelf()}
           className="text-sm sm:text-md bg-red-500 hover:bg-red-600 text-white px-4 sm:px-8 rounded"
         >
-          Clear Cart
+          Clear Shelf
         </button>
       </div>
 
@@ -120,4 +120,4 @@ const MyCart = () => {
   );
 };
 
-export default MyCart;
+export default MyShelf;

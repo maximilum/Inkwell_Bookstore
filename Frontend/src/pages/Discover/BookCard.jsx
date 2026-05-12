@@ -1,7 +1,7 @@
 import { CiHeart } from "react-icons/ci";
-import { FaShoppingBag } from "react-icons/fa";
+import { IoLibraryOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { addItemToCart } from "../../Redux/cartSlice";
+import { addItemToShelf } from "../../Redux/shelfSlice";
 
 import { useDispatch } from "react-redux";
 
@@ -59,10 +59,10 @@ const BookCard = ({ book }) => {
           </div>
           <button
             className="flex items-center gap-1.5 bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 text-xs font-medium rounded transition-colors"
-            onClick={() => dispatch(addItemToCart(book))}
+            onClick={() => dispatch(addItemToShelf(book))}
           >
-            <FaShoppingBag className="w-3.5 h-3.5" />
-            Add to cart
+            <IoLibraryOutline className="w-3.5 h-3.5" />
+            Add to shelf
           </button>
         </div>
       </div>

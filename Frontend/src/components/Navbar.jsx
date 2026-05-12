@@ -2,9 +2,9 @@ import Button from "./Button.jsx";
 import { CiUser } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
 import { GiMagnifyingGlass } from "react-icons/gi";
-import { IoLibraryOutline } from "react-icons/io5";
+import { AiOutlineHome } from "react-icons/ai";
 import { MdReceiptLong } from "react-icons/md";
-import { AiOutlineShoppingCart } from "react-icons/ai";
+import { IoLibraryOutline } from "react-icons/io5";
 import { TbHeartStar } from "react-icons/tb";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { Link } from "react-router-dom";
@@ -31,8 +31,8 @@ const DropDownList = () => {
       link: "/orders",
     },
     {
-      name: "Cart Page",
-      link: "/cart",
+      name: "My Shelf",
+      link: "/shelf",
     },
     {
       name: "Check Out",
@@ -69,8 +69,8 @@ const Navbar = () => {
   const location = useLocation();
   const path = location.pathname.split("/")[1];
 
-  const cartItems = useSelector((state) => state.cart?.cartItems ?? []);
-  const cartCount = cartItems.length;
+  const shelfItems = useSelector((state) => state.shelf?.shelfItems ?? []);
+  const shelfCount = shelfItems.length;
 
   return (
     <header className="fixed top-0 w-full bg-white shadow-lg z-50">
@@ -88,7 +88,7 @@ const Navbar = () => {
             className={`hover:bg-gray-200 transition-colors h-full flex items-center justify-center w-12 sm:w-20 px-4 ${path === "" ? "border-b-2" : ""}`}
           >
             <Link to="/" className="flex flex-col items-center ">
-              <IoLibraryOutline className="my-auto size-4 sm:size-6" />
+              <AiOutlineHome className="my-auto size-4 sm:size-6" />
               <p className="text-xs sm:text-base">Home</p>
             </Link>
           </div>
@@ -115,14 +115,14 @@ const Navbar = () => {
             </Link>
           </div>
           <div
-            className={`hover:bg-gray-200 transition-colors h-full flex items-center justify-center w-12 sm:w-20 px-4 ${path === "cart" ? "border-b-2" : ""}`}
+            className={`hover:bg-gray-200 transition-colors h-full flex items-center justify-center w-12 sm:w-20 px-4 ${path === "shelf" ? "border-b-2" : ""}`}
           >
             <Link
-              to="/cart"
+              to="/shelf"
               className="text-md text-black flex flex-col items-center "
             >
-              <MdOutlineShoppingBag className="my-auto size-4 sm:size-6" />
-              <p className="text-xs sm:text-base">Cart</p>
+              <IoLibraryOutline className="my-auto size-4 sm:size-6" />
+              <p className="text-xs sm:text-base">Shelf</p>
             </Link>
           </div>
           <div
@@ -157,11 +157,11 @@ const Navbar = () => {
               </Link>
             )}
           </div>
-          <Link to="/cart">
+          <Link to="/shelf">
             <Button>
-              <AiOutlineShoppingCart className="my-auto size-4 sm:size-6 " />
-              <span>{cartCount}</span>
-              <span className=" my-auto leading-0  sm:block hidden">Cart</span>
+              <IoLibraryOutline className="my-auto size-4 sm:size-6 " />
+              <span>{shelfCount}</span>
+              <span className=" my-auto leading-0  sm:block hidden">Shelf</span>
             </Button>
           </Link>
         </div>

@@ -1,10 +1,10 @@
-import { AiOutlineShoppingCart } from "react-icons/ai";
+import { IoLibraryOutline } from "react-icons/io5";
 import Button from "../../components/Button";
 import { Link } from "react-router-dom";
 import getImgURL from "../../utils/ImgURLcreator";
 import styles from "./carouselCard.module.css";
 import { useDispatch } from "react-redux";
-import { addItemToCart } from "../../Redux/cartSlice";
+import { addItemToShelf } from "../../Redux/shelfSlice";
 
 const BookInfo = ({ book }) => {
   const dispatch = useDispatch();
@@ -40,10 +40,10 @@ const BookInfo = ({ book }) => {
           <span className="">${price}</span>
           <span className="text-gray-500 line-through">${price2}</span>
         </div>
-        <div onClick={() => dispatch(addItemToCart(book))}>
+        <div onClick={() => dispatch(addItemToShelf(book))}>
           <Button>
-            <AiOutlineShoppingCart className="h-8 w-8" />
-            <span className="text-lg font-semibold">Add to cart</span>
+            <IoLibraryOutline className="h-8 w-8" />
+            <span className="text-lg font-semibold">Add to shelf</span>
           </Button>
         </div>
       </div>

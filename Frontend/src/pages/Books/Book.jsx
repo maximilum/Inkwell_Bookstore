@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import { useGetBookQuery } from "../../Redux/booksApiSlice";
 import getImgURL from "../../utils/ImgURLcreator";
 import { useDispatch } from "react-redux";
-import { addItemToCart } from "../../Redux/cartSlice";
+import { addItemToShelf } from "../../Redux/shelfSlice";
 import Button from "../../components/Button";
-import { AiOutlineShoppingCart } from "react-icons/ai";
+import { IoLibraryOutline } from "react-icons/io5";
 import { OrbitProgress } from "react-loading-indicators";
 
 const Book = () => {
@@ -50,10 +50,10 @@ const Book = () => {
           </span>
         </p>
         <h2 className="text-sm">{book.description}</h2>
-        <div className="w-full" onClick={() => dispatch(addItemToCart(book))}>
+        <div className="w-full" onClick={() => dispatch(addItemToShelf(book))}>
           <Button isFull={true}>
-            <AiOutlineShoppingCart className="h-8 w-8 font-bold" />
-            <span className=" font-bold">Add to Cart</span>
+            <IoLibraryOutline className="h-8 w-8 font-bold" />
+            <span className=" font-bold">Add to Shelf</span>
           </Button>
         </div>
       </div>

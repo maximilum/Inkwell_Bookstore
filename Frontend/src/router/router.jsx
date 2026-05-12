@@ -9,10 +9,10 @@ import { OrbitProgress } from "react-loading-indicators";
 const Home = lazy(() => import("../pages/home/Home"));
 const Login = lazy(() => import("../components/Login"));
 const Register = lazy(() => import("../components/Register"));
-const MyCart = lazy(() => import("../pages/Cart/MyCart"));
-const Checkout = lazy(() => import("../pages/Cart/Checkout"));
+const MyShelf = lazy(() => import("../pages/Shelf/MyShelf"));
+const Checkout = lazy(() => import("../pages/Shelf/Checkout"));
 const Book = lazy(() => import("../pages/Books/Book"));
-const Orders = lazy(() => import("../pages/Cart/Orders"));
+const Orders = lazy(() => import("../pages/Shelf/Orders"));
 const AdminLogin = lazy(() => import("../components/adminLogin"));
 const AddBook = lazy(() => import("../pages/Admin Dashboard/AddBook"));
 const ManageBooks = lazy(() => import("../pages/Admin Dashboard/ManageBooks"));
@@ -51,7 +51,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      { path: "/cart", element: <MyCart /> },
+      { path: "/shelf", element: <MyShelf /> },
       {
         path: "/checkout",
         element: (

@@ -10,7 +10,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import PlainLoading from "../components/loading/Plain_Loading.jsx";
 import { useDispatch } from "react-redux";
-import { clearCart, restoreCart } from "../Redux/cartSlice.js";
+import { clearShelf, restoreShelf } from "../Redux/shelfSlice.js";
 
 // const provider = new GoogleAuthProvider();
 
@@ -41,11 +41,11 @@ export const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  // clear cart when signOut
+  // clear shelf when signOut
   useEffect(() => {
     if (!user) {
-      dispatch(clearCart());
-    } else dispatch(restoreCart());
+      dispatch(clearShelf());
+    } else dispatch(restoreShelf());
   }, [user]);
 
   // define signUp function
@@ -76,7 +76,7 @@ export const AuthProvider = ({ children }) => {
       const user = userCredential.user;
       setUser(user);
       console.log("logged in successfully");
-      dispatch(restoreCart());
+      dispatch(restoreShelf());
       navigate("/");
     } catch (error) {
       const errorCode = error.code;
@@ -87,7 +87,7 @@ export const AuthProvider = ({ children }) => {
   const handleSignOut = async () => {
     try {
       await signOut(auth);
-      dispatch(clearCart());
+      dispatch(clearShelf());
       // setUser(null);
       console.log("signed out successfully");
       navigate("/");

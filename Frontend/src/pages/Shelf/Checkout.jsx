@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Checkout = () => {
-  const { cartItems: books } = useSelector((store) => store.cart);
+  const { shelfItems: books } = useSelector((store) => store.shelf);
   const totalPrice = books
     .reduce((total, book) => (total = total + book.newPrice), 0)
     .toFixed(2);
