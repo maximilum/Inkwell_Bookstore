@@ -13,6 +13,8 @@
   --color-Favorite: #ff5841;
 }
 
-html, body {
+html,
+body {
   overflow-x: hidden;
+  overflow-y: scroll;
 }

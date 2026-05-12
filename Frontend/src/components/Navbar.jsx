@@ -6,10 +6,10 @@ import { IoLibraryOutline } from "react-icons/io5";
 import { MdReceiptLong } from "react-icons/md";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { TbHeartStar } from "react-icons/tb";
+import { MdOutlineShoppingBag } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import avatar from "../assets/avatar.png"; //
-// import store from "../Redux/store.js";
+import avatar from "../assets/avatar.png";
 import { useSelector } from "react-redux";
 import { useAuth } from "../auth/AuthContext";
 import { useLocation } from "react-router-dom";
@@ -20,7 +20,7 @@ const DropDownList = () => {
   const list = [
     {
       name: "Dashboard",
-      link: "/dashboard",
+      link: "/dashboard/manage-books",
     },
     {
       name: "Discover",
@@ -78,7 +78,7 @@ const Navbar = () => {
         {/* Left Side */}
         <div className="px-2 sm:px-4">
           <h1 className="text-xs sm:text-3xl md:text-4xl text-black ">
-            INKWELL
+            INK<span className="text-amber-500">WELL</span>
           </h1>
         </div>
 
@@ -121,7 +121,7 @@ const Navbar = () => {
               to="/cart"
               className="text-md text-black flex flex-col items-center "
             >
-              <AiOutlineShoppingCart className="my-auto size-4 sm:size-6" />
+              <MdOutlineShoppingBag className="my-auto size-4 sm:size-6" />
               <p className="text-xs sm:text-base">Cart</p>
             </Link>
           </div>
@@ -136,21 +136,6 @@ const Navbar = () => {
               <p className="text-xs sm:text-base">Wishlist</p>
             </Link>
           </div>
-
-          {/* <div>
-            <Link to="/wishlist" className="text-md text-black">
-              Wishlist
-            </Link>
-          </div> */}
-          {/* Search bar
-          <div className="flex items-center justify-around gap-2 bg-[#eaeaea] rounded py-1 px-2 pr-4 w-full text-sm">
-            <FaMagnifyingGlass className="size-4" />
-            <input
-              type="text"
-              className="focus:outline-none w-full     placeholder:text-xs"
-              placeholder="What are you looking for?"
-            />
-          </div> */}
         </div>
         {/* Right side */}
         <div className="flex mx-2 sm:mx-4 gap-1 sm:gap-3">
