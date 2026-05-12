@@ -19,7 +19,7 @@ const ManageBooks = lazy(() => import("../pages/Admin Dashboard/ManageBooks"));
 const DashboardLayout = lazy(
   () => import("../pages/Admin Dashboard/DashboardLayout"),
 );
-const Dashboard = lazy(() => import("../pages/Admin Dashboard/Dashboard"));
+
 const EditBook = lazy(() => import("../pages/Admin Dashboard/EditBook"));
 const Discover = lazy(() => import("../pages/Discover/Discover"));
 
@@ -96,7 +96,7 @@ const router = createBrowserRouter([
       </Suspense>
     ),
     children: [
-      { path: "", element: <Dashboard /> },
+      { path: "", element: <ManageBooks /> },
       { path: "manage-books", element: <ManageBooks /> },
       { path: "edit-book/:id", element: <EditBook /> },
       { path: "add-book", element: <AddBook /> },

@@ -20,7 +20,7 @@ const DropDownList = () => {
   const list = [
     {
       name: "Dashboard",
-      link: "/dashboard/manage-books",
+      link: "/dashboard",
     },
     {
       name: "Discover",
