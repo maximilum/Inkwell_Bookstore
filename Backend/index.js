@@ -7,6 +7,7 @@ const ordersRouter = require("./routers/ordersRouter.js");
 const adminRouter = require("./admin/admin.Route.js");
 const imageUploadRouter = require("./features/Cloudinary/imageUpload.router.js");
 const categoriesRouter = require("./routers/categoriesRouter.js");
+const searchRouter = require("./routers/SearchBooksRouter.js");
 const cors = require("cors");
 
 // Enviroment Variables
@@ -23,6 +24,7 @@ app.use("/api/orders", ordersRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/images", imageUploadRouter);
 app.use("/api/categories", categoriesRouter);
+app.use("/api/search", searchRouter);
 
 const init = async () => {
   await connect_DB();
