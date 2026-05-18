@@ -1,5 +1,4 @@
 import React from "react";
-import BannerImage from "../../assets/Banner.png";
 import { Link } from "react-router-dom";
 import { HiArrowLongRight } from "react-icons/hi2";
 import texture from "../../assets/texture.jpg";
@@ -28,7 +27,7 @@ const HeroSection = () => {
 
         {/* Content Grid */}
         <div className="relative z-10 mx-auto flex h-full min-h-[calc(100vh-3.75rem)] sm:min-h-[calc(100vh-4.25rem)] max-w-screen-2xl items-center px-6 sm:px-10 lg:px-16 xl:px-24">
-          <div className="grid w-full grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12 xl:gap-20">
+          <div className="grid w-full grid-cols-1 items-center gap-8 md:grid-cols-2 lg:gap-12 xl:gap-20">
             {/* ─── Left: Typography & CTA ─── */}
             <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
               {/* Main Title */}
@@ -64,18 +63,45 @@ const HeroSection = () => {
               </Link>
             </div>
 
-            {/* ─── Right: Inkwell Illustration ─── */}
-            <div className="relative flex items-center justify-center lg:justify-end">
-              {/* Glow ring behind the image */}
-              <div className="absolute h-72 w-72 rounded-full bg-amber-500/8 blur-2xl sm:h-96 sm:w-96 lg:h-[28rem] lg:w-[28rem]" />
-              <div className="absolute h-56 w-56 rounded-full border border-white/5 sm:h-80 sm:w-80 lg:h-96 lg:w-96" />
-              {/* {/* <div className="absolute h-64 w-64 rounded-full border border-white/[0.03] sm:h-88 sm:w-88 lg:h-[26rem] lg:w-[26rem]" /> */}
-              {/* The inkwell image */}
-              <img
-                src={BannerImage}
-                alt="Inkwell — Where Great Books Begin Again"
-                className="relative z-10 w-56 max-w-md drop-shadow-2xl sm:w-72 md:w-80 lg:w-96 xl:w-[26rem]"
-              />
+            {/* ─── Right: Abstract Typographic Composition ─── */}
+            <div className="relative md:block hidden flex h-full min-h-[300px] w-full items-center justify-center lg:justify-end select-none pointer-events-none overflow-visible">
+              {/* Subtle ambient glows */}
+              <div className="absolute h-72 w-72 rounded-full bg-amber-400/5 blur-3xl sm:h-96 sm:w-96 lg:h-[28rem] lg:w-[28rem]" />
+              <div className="absolute h-64 w-64 rounded-full border border-white/5 sm:h-80 sm:w-80 lg:h-96 lg:w-96 mix-blend-overlay" />
+
+              {/* Giant Decorative Element */}
+              <div className="absolute -top-12 right-0 z-0 opacity-10 sm:-top-20 sm:right-10">
+                <span className="font-serif text-[15rem] leading-none text-white sm:text-[20rem] lg:text-[26rem]">
+                  &amp;
+                </span>
+              </div>
+
+              {/* Layered Editorial Text */}
+              <div className="relative z-10 flex flex-col items-end text-right opacity-90">
+                <span
+                  className="sansation-bold text-transparent opacity-60 mix-blend-plus-lighter"
+                  style={{ WebkitTextStroke: "2px rgba(251, 191, 36, 0.7)" }}
+                >
+                  <span className="block text-7xl tracking-tighter sm:text-8xl lg:text-[8rem] xl:text-[10rem] leading-[0.85]">
+                    READ
+                  </span>
+                </span>
+
+                <span className="sansation-bold text-white/[0.12]">
+                  <span className="block text-8xl tracking-tighter sm:text-9xl lg:text-[10rem] xl:text-[12rem] leading-[0.85] -mt-4 sm:-mt-6">
+                    MORE
+                  </span>
+                </span>
+
+                <span
+                  className="sansation-bold text-transparent opacity-40 mix-blend-plus-lighter"
+                  style={{ WebkitTextStroke: "1px rgba(255, 255, 255, 0.5)" }}
+                >
+                  <span className="block text-6xl tracking-widest sm:text-7xl lg:text-[7rem] xl:text-[9rem] leading-[0.85] -mt-3 sm:-mt-5">
+                    BOOKS
+                  </span>
+                </span>
+              </div>
             </div>
           </div>
         </div>
