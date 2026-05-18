@@ -2,12 +2,18 @@ import React from "react";
 import auth from "../../auth/firebase.config";
 import { useGetAllOrdersQuery } from "../../Redux/ordersApiSlice";
 import PlainLoading from "../../components/LoadingScreen/Plain_Loading";
+import { OrbitProgress } from "react-loading-indicators";
 
 const Orders = () => {
   const id = auth.currentUser?.uid;
   const { data, isLoading } = useGetAllOrdersQuery(id);
   const orders = data?.data;
-  if (isLoading) return <PlainLoading />;
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <OrbitProgress color="#ffd700" size="large" text="" textColor="" />
+      </div>
+    );
   if (orders === undefined)
     return (
       <div className="min-h-screen flex justify-center items-center text-4xl">

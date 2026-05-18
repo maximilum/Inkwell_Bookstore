@@ -98,17 +98,7 @@ const EditBook = () => {
   if (bookIsLoading) {
     return (
       <div className="min-h-screen bg-stone-50 flex items-center justify-center">
-        <div
-          style={{
-            width: 32,
-            height: 32,
-            border: "2.5px solid #e7e5e4",
-            borderTopColor: "#1c1917",
-            borderRadius: "50%",
-            animation: "spin 0.8s linear infinite",
-          }}
-        />
-        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+        <div className="w-8 h-8 border-[2.5px] border-stone-200 border-t-stone-900 rounded-full animate-spin-loader" />
       </div>
     );
   }

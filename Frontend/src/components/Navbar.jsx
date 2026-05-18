@@ -46,21 +46,20 @@ const DropDownList = ({ onClose }) => {
   return (
     <div className="absolute right-0 top-full mt-3 w-56 origin-top-right rounded-xl bg-white shadow-2xl ring-1 ring-black/5 font-main animate-in fade-in z-50">
       {/* Admin Section */}
-      {isAdmin && (
-        <div className="p-1.5">
-          <Link
-            to="/dashboard"
-            onClick={onClose}
-            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold text-secondary bg-amber-50 hover:bg-primary/20 transition-colors group"
-          >
-            <RxDashboard className="size-4 text-primary group-hover:scale-110 transition-transform" />
-            <span>Dashboard</span>
-          </Link>
-        </div>
-      )}
+
+      <div className="p-1.5">
+        <Link
+          to="/dashboard"
+          onClick={onClose}
+          className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold text-secondary bg-amber-50 hover:bg-primary/20 transition-colors group"
+        >
+          <RxDashboard className="size-4 text-primary group-hover:scale-110 transition-transform" />
+          <span>Dashboard</span>
+        </Link>
+      </div>
 
       {/* Divider */}
-      {isAdmin && <div className="mx-3 border-t border-gray-100" />}
+      <div className="mx-3 border-t border-gray-100" />
 
       {/* Navigation Links */}
       <div className="p-1.5">
@@ -135,7 +134,7 @@ const Navbar = () => {
         {/* Center */}
         <div className="flex mx-0 sm:mx-4 h-full overflow-hidden">
           <div
-            className={`hover:bg-gray-200 transition-colors h-full flex items-center justify-center w-10 sm:w-20 px-1 sm:px-4 ${path === "" ? "border-b-2" : ""}`}
+            className={` transition-colors h-full flex items-center justify-center w-10 sm:w-20 px-1 sm:px-4 ${path === "" ? "border-b-2 border-amber-400 bg-amber-400/30 " : ""}`}
           >
             <Link to="/" className="flex flex-col items-center ">
               <AiOutlineHome className="my-auto size-4 sm:size-6" />
@@ -143,7 +142,7 @@ const Navbar = () => {
             </Link>
           </div>
           <div
-            className={`hover:bg-gray-200 transition-colors h-full flex items-center justify-center w-10 sm:w-20 px-1 sm:px-4 ${path === "discover" ? "border-b-2" : ""}`}
+            className={`transition-colors h-full flex items-center justify-center w-10 sm:w-20 px-1 sm:px-4 ${path === "discover" ? "border-b-2 border-amber-400 bg-amber-400/30 " : ""}`}
           >
             <Link
               to="/discover"
@@ -154,18 +153,18 @@ const Navbar = () => {
             </Link>
           </div>
           <div
-            className={`hover:bg-gray-200 transition-colors h-full flex items-center justify-center w-10 sm:w-20 px-1 sm:px-4 ${path === "orders" ? "border-b-2" : ""}`}
+            className={` transition-colors h-full flex items-center justify-center w-10 sm:w-20 px-1 sm:px-4 ${path === "orders" ? "border-b-2 border-amber-400 bg-amber-400/30 " : ""}`}
           >
             <Link
               to="/orders"
-              className="text-md text-black flex flex-col items-center "
+              className="text-md text-black flex flex-col items-center"
             >
               <MdReceiptLong className="my-auto size-4 sm:size-6" />
               <p className="hidden sm:block text-xs sm:text-base">Orders</p>
             </Link>
           </div>
           <div
-            className={`hover:bg-gray-200 transition-colors h-full flex items-center justify-center w-10 sm:w-20 px-1 sm:px-4 ${path === "shelf" ? "border-b-2" : ""}`}
+            className={` transition-colors h-full flex items-center justify-center w-10 sm:w-20 px-1 sm:px-4 ${path === "shelf" ? "border-b-2 border-amber-400 bg-amber-400/30 " : ""}`}
           >
             <Link
               to="/shelf"
@@ -176,7 +175,7 @@ const Navbar = () => {
             </Link>
           </div>
           <div
-            className={`hover:bg-gray-200 transition-colors h-full flex items-center justify-center w-10 sm:w-20 px-1 sm:px-4 ${path === "wishlist" ? "border-b-2" : ""}`}
+            className={` transition-colors h-full flex items-center justify-center w-10 sm:w-20 px-1 sm:px-4 ${path === "wishlist" ? "border-b-2 border-amber-400 bg-amber-400/30 " : ""}`}
           >
             <Link
               to="/wishlist"
