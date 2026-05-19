@@ -63,8 +63,18 @@ const DashboardLayout = () => {
             onClick={handleLogout}
             className="nav-btn relative flex items-center justify-center w-10 h-10 text-stone-500 hover:bg-stone-800 hover:text-stone-200 rounded-xl transition-colors"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-[18px] h-[18px]">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              className="w-[18px] h-[18px]"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+              />
             </svg>
             <span className="nav-tip">Log out</span>
           </button>
@@ -75,13 +85,25 @@ const DashboardLayout = () => {
       <div className="flex-1 sm:ml-[60px] flex flex-col min-w-0">
         <header className="h-[56px] bg-white border-b border-stone-100 flex items-center px-6 sm:px-10 sticky top-0 z-10 shrink-0">
           <button className="sm:hidden p-1.5 mr-3 text-stone-500 hover:bg-stone-100 rounded-lg transition-colors">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-5 h-5">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" />
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              className="w-5 h-5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h7"
+              />
             </svg>
           </button>
-          <span className="font-lora text-[15px] font-semibold text-stone-800 select-none">
-            Ink<span className="text-amber-500">Well</span>
-          </span>
+          <Link to="/">
+            <span className="font-lora text-[15px] font-semibold text-stone-800 select-none">
+              Ink<span className="text-amber-500">Well</span>
+            </span>
+          </Link>
           <div className="ml-auto flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 text-[12px] font-semibold select-none">
               A
