@@ -174,7 +174,7 @@ const Navbar = () => {
               <p className="hidden sm:block text-xs sm:text-base">Shelf</p>
             </Link>
           </div>
-          <div
+          {/* <div
             className={` transition-colors h-full flex items-center justify-center w-10 sm:w-20 px-1 sm:px-4 ${path === "wishlist" ? "border-b-2 border-amber-400 bg-amber-400/30 " : ""}`}
           >
             <Link
@@ -184,7 +184,7 @@ const Navbar = () => {
               <TbHeartStar className="my-auto size-4 sm:size-6 font-bold" />
               <p className="hidden sm:block text-xs sm:text-base">Wishlist</p>
             </Link>
-          </div>
+          </div> */}
         </div>
         {/* Right side */}
         <div className="flex items-center gap-1.5 sm:gap-4 flex-shrink-0">
