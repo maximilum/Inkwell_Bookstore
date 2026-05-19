@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect } from "react";
 import BookInfo from "./BookInfo";
 import { useGetAllBooksQuery } from "../../Redux/booksApiSlice";
 import axios from "axios";
-
+import getBaseURL from "../../utils/getBaseURL";
 // Swiper imports
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
@@ -21,7 +21,7 @@ const TopSellers = () => {
     const fetchCateories = async () => {
       setIsLoadingCategories(true);
       try {
-        const res = await axios.get("http://localhost:3000/api/categories");
+        const res = await axios.get(`${getBaseURL()}/api/categories`);
         let fetchedCategories = res.data.data;
         fetchedCategories.unshift("All Genres");
         setCategories(fetchedCategories);
