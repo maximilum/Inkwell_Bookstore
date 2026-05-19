@@ -1,49 +1,112 @@
-import React from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import BookInfo from "./BookInfo";
-import { useState } from "react";
-import styles from "./carousel.module.css";
 import { useGetAllBooksQuery } from "../../Redux/booksApiSlice";
+import axios from "axios";
+
+// Swiper imports
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const TopSellers = () => {
   const { data, isLoading } = useGetAllBooksQuery();
   const books = data?.data || [];
-  const [filter, setFilter] = useState("Select a genre");
+  const [activeFilter, setActiveFilter] = useState("All Genres");
+  const [categories, setCategories] = useState();
+  const [isLoadingCategories, setIsLoadingCategories] = useState(false);
 
-  const filteredBooks =
-    filter === "Select a genre"
-      ? books
-      : books.filter((book) => book.category === filter);
+  useEffect(() => {
+    const fetchCateories = async () => {
+      setIsLoadingCategories(true);
+      try {
+        const res = await axios.get("http://localhost:3000/api/categories");
+        let fetchedCategories = res.data.data;
+        fetchedCategories.unshift("All Genres");
+        setCategories(fetchedCategories);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoadingCategories(false);
+      }
+    };
+    fetchCateories();
+  }, []);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (filteredBooks.length === 0) return <div>No books found</div>;
+  const filteredBooks = useMemo(() => {
+    if (activeFilter === "All Genres") return books;
+    return books.filter((book) => book.category === activeFilter);
+  }, [activeFilter, books]);
+
+  if (isLoading || isLoadingCategories) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   return (
-    <>
-      <div className="m-8">
-        <h1 className="text-4xl font-bold mb-4">Top Sellers</h1>
-        <select
-          onClick={(e) => setFilter(e.target.value)}
-          name=""
-          id=""
-          className="h-12 w-64 bg-[#ededed] p-1 mb-12 rounded text-lg focus:outline-none"
+    <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-[1400px] mx-auto">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+        <div>
+          <p className="text-xs font-semibold tracking-widest text-primary uppercase mb-1">
+            Trending Now
+          </p>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-secondary whitespace-nowrap">
+            Top Sellers
+          </h2>
+        </div>
+
+        {/* Filter Pills */}
+        <div className="flex flex-nowrap gap-2 overflow-x-auto [scrollbar-width:none]">
+          {categories?.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveFilter(cat)}
+              className={`px-4 py-1.5 text-xs font-medium rounded-full border transition-all duration-200 capitalize cursor-pointer ${
+                activeFilter === cat
+                  ? "bg-secondary text-white border-secondary"
+                  : "bg-white text-gray-500 border-gray-200 hover:border-primary hover:text-primary"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Carousel */}
+      {filteredBooks.length === 0 ? (
+        <div className="text-center py-16 text-gray-400">
+          <p className="text-lg">No books found in this genre.</p>
+        </div>
+      ) : (
+        <Swiper
+          modules={[Navigation, Pagination, Autoplay]}
+          spaceBetween={20}
+          slidesPerView={1}
+          navigation
+          pagination={{ clickable: true, dynamicBullets: true }}
+          autoplay={{ delay: 4000, disableOnInteraction: true }}
+          breakpoints={{
+            480: { slidesPerView: 2, spaceBetween: 16 },
+            768: { slidesPerView: 3, spaceBetween: 20 },
+            1024: { slidesPerView: 4, spaceBetween: 24 },
+            1280: { slidesPerView: 5, spaceBetween: 24 },
+          }}
+          className="pb-14"
         >
-          <option value="Select a genre">Select a genre</option>
-          <option value="business">business</option>
-          <option value="marketing">marketing</option>
-          <option value="business">business</option>
-          <option value="horror">horror</option>
-          <option value="fiction">fiction</option>
-          <option value="adventure">adventure</option>
-        </select>
-      </div>
-      <div
-        className={`w-11/12 mx-auto flex gap-32 overflow-auto ${styles.carousel}`}
-      >
-        {filteredBooks.map((book, index) => (
-          <BookInfo key={index} book={book} path="books" />
-        ))}
-      </div>
-    </>
+          {filteredBooks.map((book) => (
+            <SwiperSlide key={book._id} className="flex justify-center py-2">
+              <BookInfo book={book} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
+    </section>
   );
 };
 

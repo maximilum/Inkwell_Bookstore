@@ -1,23 +1,23 @@
 import React from "react";
 import getImgURL from "../../utils/ImgURLcreator";
 import { useSelector, useDispatch } from "react-redux";
-import { clearCart, deleteItem } from "../../Redux/cartSlice";
+import { clearShelf, deleteItem } from "../../Redux/shelfSlice";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const MyCart = () => {
-  const { cartItems: books } = useSelector((store) => store.cart);
+const MyShelf = () => {
+  const { shelfItems: books } = useSelector((store) => store.shelf);
   const dispatcher = useDispatch();
   const handleItemDelete = (book) => dispatcher(deleteItem(book));
-  const handleClearCart = () => {
+  const handleClearShelf = () => {
     Swal.fire({
-      title: "Do you want to clear the cart?",
+      title: "Do you want to clear the shelf?",
       showDenyButton: true,
       confirmButtonText: "Cancel",
       denyButtonText: `Clear`,
     }).then((result) => {
       if (result.isDenied) {
-        dispatcher(clearCart());
+        dispatcher(clearShelf());
       }
     });
   };
@@ -25,13 +25,10 @@ const MyCart = () => {
   if (books.length === 0) {
     return (
       <Link to="/">
-        <div className="flex flex-col justify-center items-center gap-8 w-full h-full mb-8 mt-8">
+        <div className="flex flex-col justify-center items-center gap-8 w-full h-[calc(100vh-4rem)] mb-8 mt-8">
           <div>
             <img className="w-64 sm:w-96" src="/EmptyCart.png" alt="" />
           </div>
-          <h1 className="text-2xl sm:text-4xl font-emptyCart text-[#72c4e7]">
-            Cart is empty
-          </h1>
         </div>
       </Link>
     );
@@ -40,14 +37,15 @@ const MyCart = () => {
   return (
     // Container
     <div className="mx-4 my-8 sm:mx-16 sm:my-16">
+      <div className="h-[60px] sm:h-[67px]  w-full"></div>
       {/* Layer 1 */}
       <div className="flex justify-between">
-        <h2 className="text-lg">Shopping Cart</h2>
+        <h2 className="text-lg">My Shelf</h2>
         <button
-          onClick={() => handleClearCart()}
+          onClick={() => handleClearShelf()}
           className="text-sm sm:text-md bg-red-500 hover:bg-red-600 text-white px-4 sm:px-8 rounded"
         >
-          Clear Cart
+          Clear Shelf
         </button>
       </div>
 
@@ -59,11 +57,7 @@ const MyCart = () => {
             <div className="flex">
               {/* Book Cover Image */}
               <div className="image-cover">
-                <img
-                  className="h-32 w-30"
-                  src={`${getImgURL("books", book.coverImage)}`}
-                  alt=""
-                />
+                <img className="h-32 w-30" src={book.coverImage} alt="" />
               </div>
               {/* Book Info */}
               <div className="ml-2 py-4 px-6 sm:ml-4 flex flex-col justify-between w-full">
@@ -126,4 +120,4 @@ const MyCart = () => {
   );
 };
 
-export default MyCart;
+export default MyShelf;

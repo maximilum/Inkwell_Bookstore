@@ -5,6 +5,9 @@ const connect_DB = require("./config/database.js");
 const { booksRouter } = require("./routers/booksRouter");
 const ordersRouter = require("./routers/ordersRouter.js");
 const adminRouter = require("./admin/admin.Route.js");
+const imageUploadRouter = require("./features/Cloudinary/imageUpload.router.js");
+const categoriesRouter = require("./routers/categoriesRouter.js");
+const searchRouter = require("./routers/SearchBooksRouter.js");
 const cors = require("cors");
 
 // Enviroment Variables
@@ -19,6 +22,9 @@ app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use("/api/books/", booksRouter);
 app.use("/api/orders", ordersRouter);
 app.use("/api/admin", adminRouter);
+app.use("/api/images", imageUploadRouter);
+app.use("/api/categories", categoriesRouter);
+app.use("/api/search", searchRouter);
 
 const init = async () => {
   await connect_DB();

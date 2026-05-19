@@ -1,14 +1,148 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Fontdiner+Swanky&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap");
 @import "tailwindcss";
+
+/* ── Theme tokens ── */
 @theme {
   --font-main: "Montserrat", sans-serif;
   --font-secondary: "Nunito Sans", sans-serif;
-  --font-emptyCart: "Fontdiner Swanky", serif;
+  --font-emptyShelf: "Fontdiner Swanky", serif;
+  --font-dm: "DM Sans", sans-serif;
+  --font-lora: "Lora", serif;
 }
 @theme {
   --color-primary: #ffce1a;
   --color-secondary: #0d0842;
   --color-blackBG: #f3f3f3;
   --color-Favorite: #ff5841;
+}
+
+/* ── Custom keyframes ── */
+@theme {
+  --animate-fade-in-up: fade-in-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  --animate-scale-in: scale-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+  --animate-shimmer: shimmer 1.5s linear infinite;
+  --animate-fade-slide-in: fade-slide-in 0.4s ease forwards;
+  --animate-spin-loader: spin-loader 0.8s linear infinite;
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes fade-slide-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes spin-loader {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Footer: link underline animation ── */
+.footer-link {
+  position: relative;
+  color: rgba(255, 255, 255, 0.55);
+  transition: color 0.3s ease;
+}
+.footer-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #ffce1a;
+  transition: width 0.3s ease;
+}
+.footer-link:hover {
+  color: #ffce1a;
+}
+.footer-link:hover::after {
+  width: 100%;
+}
+
+/* ── Dashboard: sidebar tooltip ── */
+.nav-tip {
+  position: absolute;
+  left: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1c1917;
+  color: #e7e5e4;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 120ms ease;
+  z-index: 50;
+}
+.nav-tip::before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-right-color: #1c1917;
+}
+.nav-link:hover .nav-tip,
+.nav-btn:hover .nav-tip {
+  opacity: 1;
+}
+
+/* ── BookForm: cover image hover overlay ── */
+.cover-wrap:hover .cover-overlay {
+  background: rgba(28, 25, 23, 0.28);
+}
+.cover-wrap:hover .cover-overlay-label {
+  opacity: 1;
+}
+
+/* ── BookForm: custom select arrow ── */
+.bf-select-wrap {
+  position: relative;
+}
+.bf-select-wrap::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid #a8a29e;
+}
+
+/* ── ManageBooks: row hover ── */
+.mb-row {
+  transition: background 150ms ease;
+}
+.mb-row:hover {
+  background: #fefce8;
+}
+.mb-row:hover .mb-cover {
+  transform: scale(1.04);
+}
+.mb-cover {
+  transition: transform 200ms ease;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
