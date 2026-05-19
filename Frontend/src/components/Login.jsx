@@ -17,7 +17,7 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center m-[10px] h-[calc(100dvh-67px)]  ">
-      <div className="sm:w-[400px] shadow-2xl p-6">
+      <div className="sm:w-[400px] shadow-2xl p-6 mt-16">
         <h1 className="mb-10 font-semibold">Please Login</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="text-[16px]">
           <div className="mb-[24px] relative">
