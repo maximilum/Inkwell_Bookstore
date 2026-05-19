@@ -1,3 +1,3 @@
-const getBaseURL = () => "http://localhost:3000";
+const getBaseURL = () => process.env.API_BASE_URL;
 
 export default getBaseURL;
