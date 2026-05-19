@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
 @reference "tailwindcss";
-@reference "C:/Users/Munib/Desktop/Maximilum/Coding Enviroment/Bookstore/Frontend/src/index.css";
+@reference "./index.css";
 @import url("https://fonts.googleapis.com/css2?family=Orienta&family=Oswald:wght@200..700&family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
 
 .swiper {
